@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetGlobe · Worldwide Pet Delivery</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: #fef9f2;
+      color: #2c3e4f;
+      line-height: 1.5;
+      padding-bottom: 2rem;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 1.8rem;
+    }
+
+    /* header & language bar */
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0 0.5rem;
+      border-bottom: 2px solid #ffe1c6;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      font-size: 2.5rem;
+      color: #e67e22;
+    }
+
+    .logo-text h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #2c3e4f;
+    }
+
+    .logo-text span {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #7f8c8d;
+      display: block;
+    }
+
+    .lang-selector-wrapper {
+      background: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 60px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03);
+      border: 1px solid #f3d9c2;
+    }
+
+    .lang-select {
+      font-size: 1rem;
+      padding: 0.4rem 2rem 0.4rem 1.2rem;
+      border-radius: 40px;
+      border: 1px solid #e0b894;
+      background-color: #fffaf5;
+      font-weight: 500;
+      color: #2c3e4f;
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23e67e22" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 0.8rem center;
+      background-size: 1rem;
+    }
+
+    /* hero */
+    .hero {
+      background: linear-gradient(145deg, #fff4e8 0%, #ffe6d5 100%);
+      border-radius: 48px;
+      padding: 2.5rem 3rem;
+      margin: 2.5rem 0 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hero-content h2 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #1e2b36;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin: 1rem 0 1.8rem;
+      color: #4a5c6b;
+      max-width: 550px;
+    }
+
+    .cta-btn {
+      background: #e67e22;
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border-radius: 60px;
+      font-size: 1.2rem;
+      box-shadow: 0 12px 20px -8px rgba(230, 126, 34, 0.3);
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #d35400;
+    }
+
+    .cta-btn:hover {
+      background: #d35400;
+      transform: scale(1.02);
+    }
+
+    .hero-emoji-pets {
+      font-size: 5rem;
+      background: white;
+      padding: 1.2rem 2rem;
+      border-radius: 80px;
+      box-shadow: 0 16px 30px -6px rgba(0,0,0,0.1);
+    }
+
+    /* contact section — professional, compact, smaller email */
+    .contact-section {
+      background: #ffffff;
+      border-radius: 50px;
+      padding: 1.5rem 2.2rem;
+      margin: 2rem 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #f0d5c0;
+      box-shadow: 0 8px 18px -4px rgba(0, 0, 0, 0.04);
+    }
+
+    .contact-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+      color: #e67e22;
+    }
+
+    .contact-text {
+      font-weight: 500;
+      color: #4a5c6b;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+      letter-spacing: 0.2px;
+    }
+
+    .email-display {
+      font-size: 1.2rem;        /* smaller, professional size */
+      font-weight: 600;
+      background: #faf3ed;
+      padding: 0.45rem 1.8rem;
+      border-radius: 40px;
+      color: #b85b14;
+      border: 1.5px solid #f0c9b0;
+      word-break: break-all;
+      display: inline-block;
+      font-family: 'Segoe UI', monospace;
+      letter-spacing: 0.3px;
+    }
+
+    .email-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .copy-btn {
+      background: white;
+      border: 1.8px solid #e67e22;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #e67e22;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+    }
+
+    .copy-btn:hover {
+      background: #e67e22;
+      color: white;
+    }
+
+    .copy-feedback {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #2e7d32;
+      opacity: 0;
+      transition: 0.2s;
+      min-width: 70px;
+    }
+
+    /* animal grid */
+    .section-title {
+      font-size: 2.2rem;
+      margin: 3rem 0 1.5rem;
+      font-weight: 700;
+      border-left: 8px solid #e67e22;
+      padding-left: 1.5rem;
+    }
+
+    .pet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+
+    .pet-card {
+      background: white;
+      border-radius: 32px;
+      padding: 1.5rem 1rem 1.8rem;
+      box-shadow: 0 20px 30px -6px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.25s;
+      border: 1px solid #fbe9dd;
+    }
+
+    .pet-card:hover {
+      transform: translateY(-6px);
+      border-color: #f3c19d;
+    }
+
+    .pet-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 28px;
+      box-shadow: 0 10px 14px rgba(0,0,0,0.05);
+      background: #f5e3d7;
+      margin-bottom: 1.2rem;
+      border: 2px solid #fff2e9;
+    }
+
+    .pet-card h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .pet-card p {
+      color: #5e6f7e;
+      margin: 0.5rem 0 0.8rem;
+    }
+
+    .badge {
+      background: #fbe9dd;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #a35100;
+      display: inline-block;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-around;
+      margin: 3rem 0;
+      background: #fff5ec;
+      padding: 2rem 2.5rem;
+      border-radius: 60px;
+    }
+
+    .feature-item i {
+      font-size: 2.2rem;
+      color: #e67e22;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer {
+      margin-top: 3.5rem;
+      text-align: center;
+      color: #6a7a88;
+    }
+
+    [data-lang] { display: none; }
+    [data-lang].active-lang { display: inline-block; }
+    .lang-block { display: inline; }
+    span[data-lang].active-lang { display: inline; }
+    div[data-lang].active-lang { display: block; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- top bar with language switcher -->
+  <div class="top-bar">
+    <div class="logo-area">
+      <i class="fas fa-paw logo-icon"></i>
+      <div class="logo-text">
+        <h1>PetGlobe <span>· worldwide pet delivery</span></h1>
+      </div>
+    </div>
+    <div class="lang-selector-wrapper">
+      <select id="languageSwitcher" class="lang-select" aria-label="Select language">
+        <option value="en" selected>🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="pl">🇵🇱 Polski</option>
+        <option value="cs">🇨🇿 Čeština</option>
+        <option value="sk">🇸🇰 Slovenčina</option>
+        <option value="uk">🇺🇦 Українська</option>
+        <option value="sr">🇷🇸 Српски</option>
+        <option value="hr">🇭🇷 Hrvatski</option>
+        <option value="bg">🇧🇬 Български</option>
+        <option value="sl">🇸🇮 Slovenščina</option>
+        <option value="mk">🇲🇰 Македонски</option>
+        <option value="be">🇧🇾 Беларуская</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-content">
+      <h2>
+        <span data-lang="en" class="active-lang">Pets delivered<br>with love & care</span>
+        <span data-lang="es">Mascotas entregadas<br>con amor y cuidado</span>
+        <span data-lang="fr">Animaux livrés<br>avec amour et soin</span>
+        <span data-lang="ru">Доставка питомцев<br>с любовью и заботой</span>
+        <span data-lang="pl">Zwierzęta dostarczane<br>z miłością i troską</span>
+        <span data-lang="cs">Domácí mazlíčci doručeni<br>s láskou a péčí</span>
+        <span data-lang="sk">Domáce zvieratá doručené<br>s láskou a starostlivosťou</span>
+        <span data-lang="uk">Доставка улюбленців<br>з любов'ю та турботою</span>
+        <span data-lang="sr">Kućni ljubimci isporučeni<br>s ljubavlju i brigom</span>
+        <span data-lang="hr">Kućni ljubimci dostavljeni<br>s ljubavlju i brigom</span>
+        <span data-lang="bg">Домашни любимци доставени<br>с любов и грижа</span>
+        <span data-lang="sl">Hišni ljubljenčki dostavljeni<br>z ljubeznijo in skrbjo</span>
+        <span data-lang="mk">Миленици доставени<br>со љубов и грижа</span>
+        <span data-lang="be">Хатнія жывёлы дастаўляюцца<br>з любоўю і клопатам</span>
+      </h2>
+      <p>
+        <span data-lang="en" class="active-lang">Dogs, cats, birds, reptiles, fish & more. Safe, climate‑controlled transport.</span>
+        <span data-lang="es">Perros, gatos, aves, reptiles, peces y más. Transporte seguro y climatizado.</span>
+        <span data-lang="fr">Chiens, chats, oiseaux, reptiles, poissons et plus. Transport climatisé et sûr.</span>
+        <span data-lang="ru">Собаки, кошки, птицы, рептилии, рыбы и другие. Безопасная перевозка.</span>
+        <span data-lang="pl">Psy, koty, ptaki, gady, ryby i inne. Bezpieczny transport z kontrolą klimatu.</span>
+        <span data-lang="cs">Psi, kočky, ptáci, plazi, ryby a další. Bezpečná přeprava s klimatizací.</span>
+        <span data-lang="sk">Psy, mačky, vtáky, plazy, ryby a ďalšie. Bezpečná preprava s klimatizáciou.</span>
+        <span data-lang="uk">Собаки, коти, птахи, плазуни, риби та інші. Безпечне транспортування.</span>
+        <span data-lang="sr">Psi, mačke, ptice, gmizavci, ribe i još mnogo toga. Siguran transport.</span>
+        <span data-lang="hr">Psi, mačke, ptice, gmazovi, ribe i još. Siguran prijevoz s kontrolom klime.</span>
+        <span data-lang="bg">Кучета, котки, птици, влечуги, риби и други. Сигурен транспорт.</span>
+        <span data-lang="sl">Psi, mačke, ptice, plazilci, ribe in več. Varen prevoz z nadzorom klime.</span>
+        <span data-lang="mk">Кучиња, мачки, птици, влекачи, риби и повеќе. Безбеден транспорт.</span>
+        <span data-lang="be">Сабакі, кошкі, птушкі, рэптыліі, рыбы і іншыя. Бяспечная дастаўка.</span>
+      </p>
+      <button class="cta-btn">
+        <span data-lang="en" class="active-lang">🐾 Order a companion</span>
+        <span data-lang="es">🐾 Pedir un compañero</span>
+        <span data-lang="fr">🐾 Commander un compagnon</span>
+        <span data-lang="ru">🐾 Заказать питомца</span>
+        <span data-lang="pl">🐾 Zamów towarzysza</span>
+        <span data-lang="cs">🐾 Objednat společníka</span>
+        <span data-lang="sk">🐾 Objednať spoločníka</span>
+        <span data-lang="uk">🐾 Замовити улюбленця</span>
+        <span data-lang="sr">🐾 Naruči ljubimca</span>
+        <span data-lang="hr">🐾 Naruči ljubimca</span>
+        <span data-lang="bg">🐾 Поръчай любимец</span>
+        <span data-lang="sl">🐾 Naroči spremljevalca</span>
+        <span data-lang="mk">🐾 Нарачај миленик</span>
+        <span data-lang="be">🐾 Заказаць гадаванца</span>
+      </button>
+    </div>
+    <div class="hero-emoji-pets">
+      🐕🐈‍⬛🦜🐠🦎
+    </div>
+  </div>
+
+  <!-- ✉️ CONTACT SECTION — Professional, smaller email, compact -->
+  <div class="contact-section">
+    <div class="contact-left">
+      <i class="fas fa-envelope contact-icon"></i>
+      <div>
+        <div class="contact-text">
+          <span data-lang="en" class="active-lang">Customer service · copy to contact</span>
+          <span data-lang="es">Atención al cliente · copia para contactar</span>
+          <span data-lang="fr">Service client · copiez pour contacter</span>
+          <span data-lang="ru">Служба поддержки · скопируйте для связи</span>
+          <span data-lang="pl">Obsługa klienta · skopiuj, aby się skontaktować</span>
+          <span data-lang="cs">Zákaznický servis · zkopírujte pro kontakt</span>
+          <span data-lang="sk">Zákaznícky servis · skopírujte pre kontakt</span>
+          <span data-lang="uk">Служба підтримки · скопіюйте для зв'язку</span>
+          <span data-lang="sr">Korisnička podrška · kopirajte za kontakt</span>
+          <span data-lang="hr">Služba za korisnike · kopirajte za kontakt</span>
+          <span data-lang="bg">Обслужване на клиенти · копирайте за връзка</span>
+          <span data-lang="sl">Podpora strankam · kopirajte za stik</span>
+          <span data-lang="mk">Поддршка за корисници · копирајте за контакт</span>
+          <span data-lang="be">Служба падтрымкі · скапіруйце для сувязі</span>
+        </div>
+        <span class="email-display" id="emailDisplay">Biankaanimalier@gmail.com</span>
+      </div>
+    </div>
+    <div class="email-actions">
+      <button class="copy-btn" id="copyEmailBtn">
+        <i class="far fa-copy"></i> 
+        <span data-lang="en" class="active-lang">Copy email</span>
+        <span data-lang="es">Copiar correo</span>
+        <span data-lang="fr">Copier l'email</span>
+        <span data-lang="ru">Копировать</span>
+        <span data-lang="pl">Kopiuj e-mail</span>
+        <span data-lang="cs">Kopírovat e-mail</span>
+        <span data-lang="sk">Kopírovať e-mail</span>
+        <span data-lang="uk">Копіювати email</span>
+        <span data-lang="sr">Kopiraj mejl</span>
+        <span data-lang="hr">Kopiraj e-poštu</span>
+        <span data-lang="bg">Копирай имейл</span>
+        <span data-lang="sl">Kopiraj e-pošto</span>
+        <span data-lang="mk">Копирај е-пошта</span>
+        <span data-lang="be">Скапіраваць email</span>
+      </button>
+      <span id="copyFeedback" class="copy-feedback">✓ Copied</span>
+    </div>
+  </div>
+
+  <!-- Generated pet images section -->
+  <h2 class="section-title">
+    <span data-lang="en" class="active-lang">🐶 Meet our adorable travelers</span>
+    <span data-lang="es">🐶 Conoce a nuestros adorables viajeros</span>
+    <span data-lang="fr">🐶 Rencontrez nos adorables voyageurs</span>
+    <span data-lang="ru">🐶 Познакомьтесь с нашими пушистыми путешественниками</span>
+    <span data-lang="pl">🐶 Poznaj naszych uroczych podróżników</span>
+    <span data-lang="cs">🐶 Seznamte se s našimi roztomilými cestovateli</span>
+    <span data-lang="sk">🐶 Zoznámte sa s našimi roztomilými cestovateľmi</span>
+    <span data-lang="uk">🐶 Познайомтеся з нашими милими мандрівниками</span>
+    <span data-lang="sr">🐶 Upoznajte naše simpatične putnike</span>
+    <span data-lang="hr">🐶 Upoznajte naše slatke putnike</span>
+    <span data-lang="bg">🐶 Запознайте се с нашите сладки пътешественици</span>
+    <span data-lang="sl">🐶 Spoznajte naše ljubke popotnike</span>
+    <span data-lang="mk">🐶 Запознајте ги нашите симпатични патници</span>
+    <span data-lang="be">🐶 Пазнаёмцеся з нашымі мілымі падарожнікамі</span>
+  </h2>
+
+  <div class="pet-grid">
+    <!-- Card 1 -->
+    <div class="pet-card">
+      <img class="pet-img" src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Puppy" loading="lazy">
+      <h3>
+        <span data-lang="en" class="active-lang">Puppy</span>
+        <span data-lang="es">Cachorro</span><span data-lang="fr">Chiot</span><span data-lang="ru">Щенок</span>
+        <span data-lang="pl">Szczeniak</span><span data-lang="cs">Štěně</span><span data-lang="sk">Šteňa</span>
+        <span data-lang="uk">Цуценя</span><span data-lang="sr">Štene</span><span data-lang="hr">Štene</span>
+        <span data-lang="bg">Кученце</span><span data-lang="sl">Kužek</span><span data-lang="mk">Кученце</span>
+        <span data-lang="be">Шчанюк</span>
+      </h3>
+      <p><span data-lang="en" class="active-lang">Golden Retriever</span><span data-lang="es">Golden Retriever</span><span data-lang="fr">Golden Retriever</span><span data-lang="ru">Золотистый ретривер</span><span data-lang="pl">Golden retriever</span><span data-lang="cs">Zlatý retrívr</span><span data-lang="sk">Zlatý retríver</span><span data-lang="uk">Золотистий ретривер</span><span data-lang="sr">Zlatni retriver</span><span data-lang="hr">Zlatni retriver</span><span data-lang="bg">Златен ретривър</span><span data-lang="sl">Zlati prinašalec</span><span data-lang="mk">Златен ретривер</span><span data-lang="be">Залаты рэтрывер</span></p>
+      <span class="badge"><span data-lang="en" class="active-lang">Ready to travel</span><span data-lang="es">Listo para viajar</span><span data-lang="fr">Prêt à voyager</span><span data-lang="ru">Готов к поездке</span><span data-lang="pl">Gotowy do podróży</span><span data-lang="cs">Připraven na cestu</span><span data-lang="sk">Pripravený na cestu</span><span data-lang="uk">Готовий до подорожі</span><span data-lang="sr">Spreman za put</span><span data-lang="hr">Spreman za put</span><span data-lang="bg">Готов за пътуване</span><span data-lang="sl">Pripravljen na pot</span><span data-lang="mk">Подготвен за патување</span><span data-lang="be">Гатовы да падарожжа</span></span>
+    </div>
+    <!-- Card 2 -->
+    <div class="pet-card">
+      <img class="pet-img" src="https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Kitten" loading="lazy">
+      <h3>
+        <span data-lang="en" class="active-lang">Kitten</span>
+        <span data-lang="es">Gatito</span><span data-lang="fr">Chaton</span><span data-lang="ru">Котёнок</span>
+        <span data-lang="pl">Kotek</span><span data-lang="cs">Kotě</span><span data-lang="sk">Mačiatko</span>
+        <span data-lang="uk">Кошеня</span><span data-lang="sr">Mače</span><span data-lang="hr">Mačić</span>
+        <span data-lang="bg">Коте</span><span data-lang="sl">Mucek</span><span data-lang="mk">Маче</span>
+        <span data-lang="be">Кацяня</span>
+      </h3>
+      <p><span data-lang="en" class="active-lang">British Shorthair</span><span data-lang="es">Británico de pelo corto</span><span data-lang="fr">British Shorthair</span><span data-lang="ru">Британская короткошёрстная</span><span data-lang="pl">Brytyjski krótkowłosy</span><span data-lang="cs">Britská krátkosrstá</span><span data-lang="sk">Britská krátkosrstá</span><span data-lang="uk">Британська короткошерста</span><span data-lang="sr">Britanska kratkodlaka</span><span data-lang="hr">Britanska kratkodlaka</span><span data-lang="bg">Британска късокосместа</span><span data-lang="sl">Britanska kratkodlaka</span><span data-lang="mk">Британска кратковлакнеста</span><span data-lang="be">Брытанская кароткашэрсная</span></p>
+      <span class="badge"><span data-lang="en" class="active-lang">Playful & vaccinated</span><span data-lang="es">Juguetón y vacunado</span><span data-lang="fr">Joueur et vacciné</span><span data-lang="ru">Игривый, привит</span><span data-lang="pl">Zabawny i zaszczepiony</span><span data-lang="cs">Hravý a očkovaný</span><span data-lang="sk">Hravý a očkovaný</span><span data-lang="uk">Грайливий, вакцинований</span><span data-lang="sr">Razigran i vakcinisan</span><span data-lang="hr">Razigran i cijepljen</span><span data-lang="bg">Игрив и ваксиниран</span><span data-lang="sl">Igriv in cepljen</span><span data-lang="mk">Разигран и вакциниран</span><span data-lang="be">Гуллівы і прышчэплены</span></span>
+    </div>
+    <!-- Card 3 -->
+    <div class="pet-card">
+      <img class="pet-img" src="https://images.pexels.com/photos/2317904/pexels-photo-2317904.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Parrot" loading="lazy">
+      <h3>
+        <span data-lang="en" class="active-lang">Parrot</span>
+        <span data-lang="es">Loro</span><span data-lang="fr">Perroquet</span><span data-lang="ru">Попугай</span>
+        <span data-lang="pl">Papuga</span><span data-lang="cs">Papoušek</span><span data-lang="sk">Papagáj</span>
+        <span data-lang="uk">Папуга</span><span data-lang="sr">Papagaj</span><span data-lang="hr">Papiga</span>
+        <span data-lang="bg">Папагал</span><span data-lang="sl">Papiga</span><span data-lang="mk">Папагал</span>
+        <span data-lang="be">Папугай</span>
+      </h3>
+      <p><span data-lang="en" class="active-lang">Colorful Macaw</span><span data-lang="es">Guacamayo colorido</span><span data-lang="fr">Ara coloré</span><span data-lang="ru">Попугай ара</span><span data-lang="pl">Ara kolorowa</span><span data-lang="cs">Ara pestrý</span><span data-lang="sk">Ara pestrý</span><span data-lang="uk">Різнобарвний ара</span><span data-lang="sr">Šarena ara</span><span data-lang="hr">Šarena ara</span><span data-lang="bg">Пъстра ара</span><span data-lang="sl">Pisana ara</span><span data-lang="mk">Шарена ара</span><span data-lang="be">Стракаты ара</span></p>
+      <span class="badge"><span data-lang="en" class="active-lang">Talks & whistles</span><span data-lang="es">Habla y silba</span><span data-lang="fr">Parle et siffle</span><span data-lang="ru">Говорит и свистит</span><span data-lang="pl">Mówi i gwiżdże</span><span data-lang="cs">Mluví a píská</span><span data-lang="sk">Hovorí a píska</span><span data-lang="uk">Говорить і свистить</span><span data-lang="sr">Priča i zviždi</span><span data-lang="hr">Priča i zviždi</span><span data-lang="bg">Говори и свири</span><span data-lang="sl">Govori in žvižga</span><span data-lang="mk">Зборува и свирка</span><span data-lang="be">Размаўляе і свішча</span></span>
+    </div>
+    <!-- Card 4 -->
+    <div class="pet-card">
+      <img class="pet-img" src="https://images.pexels.com/photos/326012/pexels-photo-326012.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Rabbit" loading="lazy">
+      <h3>
+        <span data-lang="en" class="active-lang">Rabbit</span>
+        <span data-lang="es">Conejo</span><span data-lang="fr">Lapin</span><span data-lang="ru">Кролик</span>
+        <span data-lang="pl">Królik</span><span data-lang="cs">Králík</span><span data-lang="sk">Králik</span>
+        <span data-lang="uk">Кролик</span><span data-lang="sr">Zec</span><span data-lang="hr">Zec</span>
+        <span data-lang="bg">Заек</span><span data-lang="sl">Zajec</span><span data-lang="mk">Зајак</span>
+        <span data-lang="be">Трус</span>
+      </h3>
+      <p><span data-lang="en" class="active-lang">Holland Lop</span><span data-lang="es">Holland Lop</span><span data-lang="fr">Holland Lop</span><span data-lang="ru">Голландский вислоухий</span><span data-lang="pl">Holland lop</span><span data-lang="cs">Holland lop</span><span data-lang="sk">Holland lop</span><span data-lang="uk">Голландський висловухий</span><span data-lang="sr">Holandski ovčar</span><span data-lang="hr">Holandski lop</span><span data-lang="bg">Холандски лоп</span><span data-lang="sl">Holland lop</span><span data-lang="mk">Холандски лоп</span><span data-lang="be">Галандскі віславухі</span></p>
+      <span class="badge"><span data-lang="en" class="active-lang">Cuddly friend</span><span data-lang="es">Amigo mimoso</span><span data-lang="fr">Ami câlin</span><span data-lang="ru">Ласковый друг</span><span data-lang="pl">Przytulny przyjaciel</span><span data-lang="cs">Mazlivý přítel</span><span data-lang="sk">Maznavý priateľ</span><span data-lang="uk">Ніжний друг</span><span data-lang="sr">Mazan prijatelj</span><span data-lang="hr">Mazan prijatelj</span><span data-lang="bg">Гальовен приятел</span><span data-lang="sl">Crkljiv prijatelj</span><span data-lang="mk">Гальовен пријател</span><span data-lang="be">Ласкавы сябар</span></span>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature-item"><i class="fas fa-truck"></i><br>
+      <span data-lang="en" class="active-lang">Global delivery</span>
+      <span data-lang="es">Envío global</span><span data-lang="fr">Livraison mondiale</span>
+      <span data-lang="ru">Доставка по миру</span><span data-lang="pl">Dostawa globalna</span>
+      <span data-lang="cs">Globální doručení</span><span data-lang="sk">Globálne doručenie</span>
+      <span data-lang="uk">Глобальна доставка</span><span data-lang="sr">Globalna dostava</span>
+      <span data-lang="hr">Globalna dostava</span><span data-lang="bg">Глобална доставка</span>
+      <span data-lang="sl">Globalna dostava</span><span data-lang="mk">Глобална достава</span>
+      <span data-lang="be">Глабальная дастаўка</span>
+    </div>
+    <div class="feature-item"><i class="fas fa-shield-alt"></i><br>
+      <span data-lang="en" class="active-lang">Vet checked</span>
+      <span data-lang="es">Revisado por vet</span><span data-lang="fr">Contrôle vétérinaire</span>
+      <span data-lang="ru">Осмотр ветеринара</span><span data-lang="pl">Sprawdzony wet.</span>
+      <span data-lang="cs">Veterinární kontrola</span><span data-lang="sk">Veterinárna kontrola</span>
+      <span data-lang="uk">Огляд ветеринара</span><span data-lang="sr">Veterinarski pregled</span>
+      <span data-lang="hr">Veterinarski pregled</span>
+      <span data-lang="bg">Ветеринарен преглед</span>
+      <span data-lang="sl">Veterinarski pregled</span>
+      <span data-lang="mk">Ветеринарен преглед</span>
+      <span data-lang="be">Ветэрынарны агляд</span>
+    </div>
+    <div class="feature-item"><i class="fas fa-thermometer-half"></i><br>
+      <span data-lang="en" class="active-lang">Climate control</span>
+      <span data-lang="es">Climatización</span><span data-lang="fr">Climatisation</span>
+      <span data-lang="ru">Климат-контроль</span><span data-lang="pl">Kontrola klimatu</span>
+      <span data-lang="cs">Klimatizace</span><span data-lang="sk">Klimatizácia</span>
+      <span data-lang="uk">Клімат-контроль</span><span data-lang="sr">Kontrola klime</span><span data-lang="hr">Kontrola klime</span>
+      <span data-lang="bg">Климатичен контрол</span><span data-lang="sl">Nadzor klime</span><span data-lang="mk">Клима контрола</span>
+      <span data-lang="be">Клімат-кантроль</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <i class="fas fa-heart" style="color:#e67e22"></i> 
+    <span data-lang="en" class="active-lang">PetGlobe · delivering happiness since 2012</span>
+    <span data-lang="es">PetGlobe · entregando felicidad desde 2012</span>
+    <span data-lang="fr">PetGlobe · livrer du bonheur depuis 2012</span>
+    <span data-lang="ru">PetGlobe · доставляем счастье с 2012</span>
+    <span data-lang="pl">PetGlobe · dostarczamy szczęście od 2012</span>
+    <span data-lang="cs">PetGlobe · doručujeme štěstí od roku 2012</span>
+    <span data-lang="sk">PetGlobe · doručujeme šťastie od 2012</span>
+    <span data-lang="uk">PetGlobe · доставляємо щастя з 2012</span>
+    <span data-lang="sr">PetGlobe · isporučujemo sreću od 2012</span>
+    <span data-lang="hr">PetGlobe · dostavljamo sreću od 2012</span>
+    <span data-lang="bg">PetGlobe · доставяме щастие от 2012</span>
+    <span data-lang="sl">PetGlobe · dostavljamo srečo od 2012</span>
+    <span data-lang="mk">PetGlobe · доставуваме среќа од 2012</span>
+    <span data-lang="be">PetGlobe · дастаўляем шчасце з 2012</span>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const langSelect = document.getElementById('languageSwitcher');
+    
+    function switchLanguage(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => el.classList.remove('active-lang'));
+      document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => el.classList.add('active-lang'));
+      document.documentElement.lang = lang;
+      localStorage.setItem('petglobe-lang', lang);
+    }
+    
+    langSelect.addEventListener('change', (e) => switchLanguage(e.target.value));
+    
+    const storedLang = localStorage.getItem('petglobe-lang');
+    if (storedLang && langSelect.querySelector(`option[value="${storedLang}"]`)) {
+      langSelect.value = storedLang;
+      switchLanguage(storedLang);
+    } else {
+      switchLanguage('en');
+    }
+
+    // 📋 COPY EMAIL
+    const copyBtn = document.getElementById('copyEmailBtn');
+    const feedback = document.getElementById('copyFeedback');
+    const email = 'Biankaanimalier@gmail.com';
+    
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(email).then(() => {
+        feedback.style.opacity = '1';
+        setTimeout(() => feedback.style.opacity = '0', 1500);
+      }).catch(() => {
+        const textArea = document.createElement('textarea');
+        textArea.value = email;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        feedback.style.opacity = '1';
+        setTimeout(() => feedback.style.opacity = '0', 1500);
+      });
+    });
+  })();
+</script>
+
+<div style="text-align:center; margin-top:1.2rem; font-size:0.85rem; opacity:0.65;">
+  🌍· Contact: Biankaanimalier@gmail.com
+</div>
+</body>
+</html>
