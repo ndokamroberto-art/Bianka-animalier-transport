@@ -1,630 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PetGlobe · Worldwide Pet Delivery</title>
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
-
-    body {
-      background: #fef9f2;
-      color: #2c3e4f;
-      line-height: 1.5;
-      padding-bottom: 2rem;
-    }
-
-    .container {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 0 1.8rem;
-    }
-
-    /* header & language bar */
-    .top-bar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 0 0.5rem;
-      border-bottom: 2px solid #ffe1c6;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo-icon {
-      font-size: 2.5rem;
-      color: #e67e22;
-    }
-
-    .logo-text h1 {
-      font-size: 1.9rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: #2c3e4f;
-    }
-
-    .logo-text span {
-      font-weight: 400;
-      font-size: 1rem;
-      color: #7f8c8d;
-      display: block;
-    }
-
-    .lang-selector-wrapper {
-      background: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 60px;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03);
-      border: 1px solid #f3d9c2;
-    }
-
-    .lang-select {
-      font-size: 1rem;
-      padding: 0.4rem 2rem 0.4rem 1.2rem;
-      border-radius: 40px;
-      border: 1px solid #e0b894;
-      background-color: #fffaf5;
-      font-weight: 500;
-      color: #2c3e4f;
-      cursor: pointer;
-      outline: none;
-      appearance: none;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23e67e22" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>');
-      background-repeat: no-repeat;
-      background-position: right 0.8rem center;
-      background-size: 1rem;
-    }
-
-    /* hero */
-    .hero {
-      background: linear-gradient(145deg, #fff4e8 0%, #ffe6d5 100%);
-      border-radius: 48px;
-      padding: 2.5rem 3rem;
-      margin: 2.5rem 0 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .hero-content h2 {
-      font-size: 2.6rem;
-      font-weight: 800;
-      line-height: 1.2;
-      color: #1e2b36;
-    }
-
-    .hero-content p {
-      font-size: 1.2rem;
-      margin: 1rem 0 1.8rem;
-      color: #4a5c6b;
-      max-width: 550px;
-    }
-
-    .cta-btn {
-      background: #e67e22;
-      border: none;
-      color: white;
-      font-weight: 700;
-      padding: 1rem 2.5rem;
-      border-radius: 60px;
-      font-size: 1.2rem;
-      box-shadow: 0 12px 20px -8px rgba(230, 126, 34, 0.3);
-      cursor: pointer;
-      transition: 0.2s;
-      border: 1px solid #d35400;
-    }
-
-    .cta-btn:hover {
-      background: #d35400;
-      transform: scale(1.02);
-    }
-
-    .hero-emoji-pets {
-      font-size: 5rem;
-      background: white;
-      padding: 1.2rem 2rem;
-      border-radius: 80px;
-      box-shadow: 0 16px 30px -6px rgba(0,0,0,0.1);
-    }
-
-    /* contact section — professional, compact, smaller email */
-    .contact-section {
-      background: #ffffff;
-      border-radius: 50px;
-      padding: 1.5rem 2.2rem;
-      margin: 2rem 0 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      border: 1px solid #f0d5c0;
-      box-shadow: 0 8px 18px -4px rgba(0, 0, 0, 0.04);
-    }
-
-    .contact-left {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .contact-icon {
-      font-size: 2rem;
-      color: #e67e22;
-    }
-
-    .contact-text {
-      font-weight: 500;
-      color: #4a5c6b;
-      margin-bottom: 4px;
-      font-size: 0.95rem;
-      letter-spacing: 0.2px;
-    }
-
-    .email-display {
-      font-size: 1.2rem;        /* smaller, professional size */
-      font-weight: 600;
-      background: #faf3ed;
-      padding: 0.45rem 1.8rem;
-      border-radius: 40px;
-      color: #b85b14;
-      border: 1.5px solid #f0c9b0;
-      word-break: break-all;
-      display: inline-block;
-      font-family: 'Segoe UI', monospace;
-      letter-spacing: 0.3px;
-    }
-
-    .email-actions {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .copy-btn {
-      background: white;
-      border: 1.8px solid #e67e22;
-      padding: 0.7rem 1.8rem;
-      border-radius: 40px;
-      font-weight: 600;
-      color: #e67e22;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
-    }
-
-    .copy-btn:hover {
-      background: #e67e22;
-      color: white;
-    }
-
-    .copy-feedback {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #2e7d32;
-      opacity: 0;
-      transition: 0.2s;
-      min-width: 70px;
-    }
-
-    /* animal grid */
-    .section-title {
-      font-size: 2.2rem;
-      margin: 3rem 0 1.5rem;
-      font-weight: 700;
-      border-left: 8px solid #e67e22;
-      padding-left: 1.5rem;
-    }
-
-    .pet-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-    }
-
-    .pet-card {
-      background: white;
-      border-radius: 32px;
-      padding: 1.5rem 1rem 1.8rem;
-      box-shadow: 0 20px 30px -6px rgba(0, 0, 0, 0.05);
-      text-align: center;
-      transition: transform 0.25s;
-      border: 1px solid #fbe9dd;
-    }
-
-    .pet-card:hover {
-      transform: translateY(-6px);
-      border-color: #f3c19d;
-    }
-
-    .pet-img {
-      width: 100%;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      border-radius: 28px;
-      box-shadow: 0 10px 14px rgba(0,0,0,0.05);
-      background: #f5e3d7;
-      margin-bottom: 1.2rem;
-      border: 2px solid #fff2e9;
-    }
-
-    .pet-card h3 {
-      font-size: 1.6rem;
-      font-weight: 700;
-    }
-
-    .pet-card p {
-      color: #5e6f7e;
-      margin: 0.5rem 0 0.8rem;
-    }
-
-    .badge {
-      background: #fbe9dd;
-      padding: 0.3rem 1.2rem;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: #a35100;
-      display: inline-block;
-    }
-
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: space-around;
-      margin: 3rem 0;
-      background: #fff5ec;
-      padding: 2rem 2.5rem;
-      border-radius: 60px;
-    }
-
-    .feature-item i {
-      font-size: 2.2rem;
-      color: #e67e22;
-      margin-bottom: 0.5rem;
-    }
-
-    .footer {
-      margin-top: 3.5rem;
-      text-align: center;
-      color: #6a7a88;
-    }
-
-    [data-lang] { display: none; }
-    [data-lang].active-lang { display: inline-block; }
-    .lang-block { display: inline; }
-    span[data-lang].active-lang { display: inline; }
-    div[data-lang].active-lang { display: block; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bianka Animalier | Europe's Trusted Pet Transport</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .loader {
+            border-top-color: #3b82f6;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .star-rating {
+            color: #fbbf24;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0f172a;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 50;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(34, 197, 94, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            }
+        }
+        .lang-dropdown {
+            display: none;
+        }
+        .lang-dropdown.show {
+            display: block;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-<div class="container">
-  <!-- top bar with language switcher -->
-  <div class="top-bar">
-    <div class="logo-area">
-      <i class="fas fa-paw logo-icon"></i>
-      <div class="logo-text">
-        <h1>PetGlobe <span>· worldwide pet delivery</span></h1>
-      </div>
-    </div>
-    <div class="lang-selector-wrapper">
-      <select id="languageSwitcher" class="lang-select" aria-label="Select language">
-        <option value="en" selected>🇬🇧 English</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="fr">🇫🇷 Français</option>
-        <option value="ru">🇷🇺 Русский</option>
-        <option value="pl">🇵🇱 Polski</option>
-        <option value="cs">🇨🇿 Čeština</option>
-        <option value="sk">🇸🇰 Slovenčina</option>
-        <option value="uk">🇺🇦 Українська</option>
-        <option value="sr">🇷🇸 Српски</option>
-        <option value="hr">🇭🇷 Hrvatski</option>
-        <option value="bg">🇧🇬 Български</option>
-        <option value="sl">🇸🇮 Slovenščina</option>
-        <option value="mk">🇲🇰 Македонски</option>
-        <option value="be">🇧🇾 Беларуская</option>
-      </select>
-    </div>
-  </div>
-
-  <!-- Hero -->
-  <div class="hero">
-    <div class="hero-content">
-      <h2>
-        <span data-lang="en" class="active-lang">Pets delivered<br>with love & care</span>
-        <span data-lang="es">Mascotas entregadas<br>con amor y cuidado</span>
-        <span data-lang="fr">Animaux livrés<br>avec amour et soin</span>
-        <span data-lang="ru">Доставка питомцев<br>с любовью и заботой</span>
-        <span data-lang="pl">Zwierzęta dostarczane<br>z miłością i troską</span>
-        <span data-lang="cs">Domácí mazlíčci doručeni<br>s láskou a péčí</span>
-        <span data-lang="sk">Domáce zvieratá doručené<br>s láskou a starostlivosťou</span>
-        <span data-lang="uk">Доставка улюбленців<br>з любов'ю та турботою</span>
-        <span data-lang="sr">Kućni ljubimci isporučeni<br>s ljubavlju i brigom</span>
-        <span data-lang="hr">Kućni ljubimci dostavljeni<br>s ljubavlju i brigom</span>
-        <span data-lang="bg">Домашни любимци доставени<br>с любов и грижа</span>
-        <span data-lang="sl">Hišni ljubljenčki dostavljeni<br>z ljubeznijo in skrbjo</span>
-        <span data-lang="mk">Миленици доставени<br>со љубов и грижа</span>
-        <span data-lang="be">Хатнія жывёлы дастаўляюцца<br>з любоўю і клопатам</span>
-      </h2>
-      <p>
-        <span data-lang="en" class="active-lang">Dogs, cats, birds, reptiles, fish & more. Safe, climate‑controlled transport.</span>
-        <span data-lang="es">Perros, gatos, aves, reptiles, peces y más. Transporte seguro y climatizado.</span>
-        <span data-lang="fr">Chiens, chats, oiseaux, reptiles, poissons et plus. Transport climatisé et sûr.</span>
-        <span data-lang="ru">Собаки, кошки, птицы, рептилии, рыбы и другие. Безопасная перевозка.</span>
-        <span data-lang="pl">Psy, koty, ptaki, gady, ryby i inne. Bezpieczny transport z kontrolą klimatu.</span>
-        <span data-lang="cs">Psi, kočky, ptáci, plazi, ryby a další. Bezpečná přeprava s klimatizací.</span>
-        <span data-lang="sk">Psy, mačky, vtáky, plazy, ryby a ďalšie. Bezpečná preprava s klimatizáciou.</span>
-        <span data-lang="uk">Собаки, коти, птахи, плазуни, риби та інші. Безпечне транспортування.</span>
-        <span data-lang="sr">Psi, mačke, ptice, gmizavci, ribe i još mnogo toga. Siguran transport.</span>
-        <span data-lang="hr">Psi, mačke, ptice, gmazovi, ribe i još. Siguran prijevoz s kontrolom klime.</span>
-        <span data-lang="bg">Кучета, котки, птици, влечуги, риби и други. Сигурен транспорт.</span>
-        <span data-lang="sl">Psi, mačke, ptice, plazilci, ribe in več. Varen prevoz z nadzorom klime.</span>
-        <span data-lang="mk">Кучиња, мачки, птици, влекачи, риби и повеќе. Безбеден транспорт.</span>
-        <span data-lang="be">Сабакі, кошкі, птушкі, рэптыліі, рыбы і іншыя. Бяспечная дастаўка.</span>
-      </p>
-      <button class="cta-btn">
-        <span data-lang="en" class="active-lang">🐾 Order a companion</span>
-        <span data-lang="es">🐾 Pedir un compañero</span>
-        <span data-lang="fr">🐾 Commander un compagnon</span>
-        <span data-lang="ru">🐾 Заказать питомца</span>
-        <span data-lang="pl">🐾 Zamów towarzysza</span>
-        <span data-lang="cs">🐾 Objednat společníka</span>
-        <span data-lang="sk">🐾 Objednať spoločníka</span>
-        <span data-lang="uk">🐾 Замовити улюбленця</span>
-        <span data-lang="sr">🐾 Naruči ljubimca</span>
-        <span data-lang="hr">🐾 Naruči ljubimca</span>
-        <span data-lang="bg">🐾 Поръчай любимец</span>
-        <span data-lang="sl">🐾 Naroči spremljevalca</span>
-        <span data-lang="mk">🐾 Нарачај миленик</span>
-        <span data-lang="be">🐾 Заказаць гадаванца</span>
-      </button>
-    </div>
-    <div class="hero-emoji-pets">
-      🐕🐈‍⬛🦜🐠🦎
-    </div>
-  </div>
-
-  <!-- ✉️ CONTACT SECTION — Professional, smaller email, compact -->
-  <div class="contact-section">
-    <div class="contact-left">
-      <i class="fas fa-envelope contact-icon"></i>
-      <div>
-        <div class="contact-text">
-          <span data-lang="en" class="active-lang">Customer service · copy to contact</span>
-          <span data-lang="es">Atención al cliente · copia para contactar</span>
-          <span data-lang="fr">Service client · copiez pour contacter</span>
-          <span data-lang="ru">Служба поддержки · скопируйте для связи</span>
-          <span data-lang="pl">Obsługa klienta · skopiuj, aby się skontaktować</span>
-          <span data-lang="cs">Zákaznický servis · zkopírujte pro kontakt</span>
-          <span data-lang="sk">Zákaznícky servis · skopírujte pre kontakt</span>
-          <span data-lang="uk">Служба підтримки · скопіюйте для зв'язку</span>
-          <span data-lang="sr">Korisnička podrška · kopirajte za kontakt</span>
-          <span data-lang="hr">Služba za korisnike · kopirajte za kontakt</span>
-          <span data-lang="bg">Обслужване на клиенти · копирайте за връзка</span>
-          <span data-lang="sl">Podpora strankam · kopirajte za stik</span>
-          <span data-lang="mk">Поддршка за корисници · копирајте за контакт</span>
-          <span data-lang="be">Служба падтрымкі · скапіруйце для сувязі</span>
+    <div id="lang-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
+            <h3 class="text-2xl font-bold mb-4 text-gray-800" data-key="modal_welcome">Welcome!</h3>
+            <p class="mb-6 text-gray-600"><span data-key="modal_detected_prefix">We detected your location. Would you like to switch to</span> <span id="detected-country" class="font-bold text-blue-600"></span>?</p>
+            <div class="flex justify-center gap-4">
+                <button onclick="closeLangModal(true)" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition" data-key="modal_yes">Yes, switch</button>
+                <button onclick="closeLangModal(false)" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-gray-300 transition" data-key="modal_no">Stay in English</button>
+            </div>
         </div>
-        <span class="email-display" id="emailDisplay">Biankaanimalier@gmail.com</span>
-      </div>
     </div>
-    <div class="email-actions">
-      <button class="copy-btn" id="copyEmailBtn">
-        <i class="far fa-copy"></i> 
-        <span data-lang="en" class="active-lang">Copy email</span>
-        <span data-lang="es">Copiar correo</span>
-        <span data-lang="fr">Copier l'email</span>
-        <span data-lang="ru">Копировать</span>
-        <span data-lang="pl">Kopiuj e-mail</span>
-        <span data-lang="cs">Kopírovat e-mail</span>
-        <span data-lang="sk">Kopírovať e-mail</span>
-        <span data-lang="uk">Копіювати email</span>
-        <span data-lang="sr">Kopiraj mejl</span>
-        <span data-lang="hr">Kopiraj e-poštu</span>
-        <span data-lang="bg">Копирай имейл</span>
-        <span data-lang="sl">Kopiraj e-pošto</span>
-        <span data-lang="mk">Копирај е-пошта</span>
-        <span data-lang="be">Скапіраваць email</span>
-      </button>
-      <span id="copyFeedback" class="copy-feedback">✓ Copied</span>
-    </div>
-  </div>
 
-  <!-- Generated pet images section -->
-  <h2 class="section-title">
-    <span data-lang="en" class="active-lang">🐶 Meet our adorable travelers</span>
-    <span data-lang="es">🐶 Conoce a nuestros adorables viajeros</span>
-    <span data-lang="fr">🐶 Rencontrez nos adorables voyageurs</span>
-    <span data-lang="ru">🐶 Познакомьтесь с нашими пушистыми путешественниками</span>
-    <span data-lang="pl">🐶 Poznaj naszych uroczych podróżników</span>
-    <span data-lang="cs">🐶 Seznamte se s našimi roztomilými cestovateli</span>
-    <span data-lang="sk">🐶 Zoznámte sa s našimi roztomilými cestovateľmi</span>
-    <span data-lang="uk">🐶 Познайомтеся з нашими милими мандрівниками</span>
-    <span data-lang="sr">🐶 Upoznajte naše simpatične putnike</span>
-    <span data-lang="hr">🐶 Upoznajte naše slatke putnike</span>
-    <span data-lang="bg">🐶 Запознайте се с нашите сладки пътешественици</span>
-    <span data-lang="sl">🐶 Spoznajte naše ljubke popotnike</span>
-    <span data-lang="mk">🐶 Запознајте ги нашите симпатични патници</span>
-    <span data-lang="be">🐶 Пазнаёмцеся з нашымі мілымі падарожнікамі</span>
-  </h2>
+    <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white z-40 p-4 transform translate-y-full transition-transform duration-300">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-sm text-gray-300" data-key="cookie_text">We use cookies to enhance your experience.</p>
+            <div class="flex gap-3">
+                <button onclick="acceptCookies()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition" data-key="cookie_accept">Accept</button>
+                <button onclick="declineCookies()" class="bg-gray-700 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-600 transition" data-key="cookie_decline">Decline</button>
+            </div>
+        </div>
+    </div>
 
-  <div class="pet-grid">
-    <!-- Card 1 -->
-    <div class="pet-card">
-      <img class="pet-img" src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Puppy" loading="lazy">
-      <h3>
-        <span data-lang="en" class="active-lang">Puppy</span>
-        <span data-lang="es">Cachorro</span><span data-lang="fr">Chiot</span><span data-lang="ru">Щенок</span>
-        <span data-lang="pl">Szczeniak</span><span data-lang="cs">Štěně</span><span data-lang="sk">Šteňa</span>
-        <span data-lang="uk">Цуценя</span><span data-lang="sr">Štene</span><span data-lang="hr">Štene</span>
-        <span data-lang="bg">Кученце</span><span data-lang="sl">Kužek</span><span data-lang="mk">Кученце</span>
-        <span data-lang="be">Шчанюк</span>
-      </h3>
-      <p><span data-lang="en" class="active-lang">Golden Retriever</span><span data-lang="es">Golden Retriever</span><span data-lang="fr">Golden Retriever</span><span data-lang="ru">Золотистый ретривер</span><span data-lang="pl">Golden retriever</span><span data-lang="cs">Zlatý retrívr</span><span data-lang="sk">Zlatý retríver</span><span data-lang="uk">Золотистий ретривер</span><span data-lang="sr">Zlatni retriver</span><span data-lang="hr">Zlatni retriver</span><span data-lang="bg">Златен ретривър</span><span data-lang="sl">Zlati prinašalec</span><span data-lang="mk">Златен ретривер</span><span data-lang="be">Залаты рэтрывер</span></p>
-      <span class="badge"><span data-lang="en" class="active-lang">Ready to travel</span><span data-lang="es">Listo para viajar</span><span data-lang="fr">Prêt à voyager</span><span data-lang="ru">Готов к поездке</span><span data-lang="pl">Gotowy do podróży</span><span data-lang="cs">Připraven na cestu</span><span data-lang="sk">Pripravený na cestu</span><span data-lang="uk">Готовий до подорожі</span><span data-lang="sr">Spreman za put</span><span data-lang="hr">Spreman za put</span><span data-lang="bg">Готов за пътуване</span><span data-lang="sl">Pripravljen na pot</span><span data-lang="mk">Подготвен за патување</span><span data-lang="be">Гатовы да падарожжа</span></span>
-    </div>
-    <!-- Card 2 -->
-    <div class="pet-card">
-      <img class="pet-img" src="https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Kitten" loading="lazy">
-      <h3>
-        <span data-lang="en" class="active-lang">Kitten</span>
-        <span data-lang="es">Gatito</span><span data-lang="fr">Chaton</span><span data-lang="ru">Котёнок</span>
-        <span data-lang="pl">Kotek</span><span data-lang="cs">Kotě</span><span data-lang="sk">Mačiatko</span>
-        <span data-lang="uk">Кошеня</span><span data-lang="sr">Mače</span><span data-lang="hr">Mačić</span>
-        <span data-lang="bg">Коте</span><span data-lang="sl">Mucek</span><span data-lang="mk">Маче</span>
-        <span data-lang="be">Кацяня</span>
-      </h3>
-      <p><span data-lang="en" class="active-lang">British Shorthair</span><span data-lang="es">Británico de pelo corto</span><span data-lang="fr">British Shorthair</span><span data-lang="ru">Британская короткошёрстная</span><span data-lang="pl">Brytyjski krótkowłosy</span><span data-lang="cs">Britská krátkosrstá</span><span data-lang="sk">Britská krátkosrstá</span><span data-lang="uk">Британська короткошерста</span><span data-lang="sr">Britanska kratkodlaka</span><span data-lang="hr">Britanska kratkodlaka</span><span data-lang="bg">Британска късокосместа</span><span data-lang="sl">Britanska kratkodlaka</span><span data-lang="mk">Британска кратковлакнеста</span><span data-lang="be">Брытанская кароткашэрсная</span></p>
-      <span class="badge"><span data-lang="en" class="active-lang">Playful & vaccinated</span><span data-lang="es">Juguetón y vacunado</span><span data-lang="fr">Joueur et vacciné</span><span data-lang="ru">Игривый, привит</span><span data-lang="pl">Zabawny i zaszczepiony</span><span data-lang="cs">Hravý a očkovaný</span><span data-lang="sk">Hravý a očkovaný</span><span data-lang="uk">Грайливий, вакцинований</span><span data-lang="sr">Razigran i vakcinisan</span><span data-lang="hr">Razigran i cijepljen</span><span data-lang="bg">Игрив и ваксиниран</span><span data-lang="sl">Igriv in cepljen</span><span data-lang="mk">Разигран и вакциниран</span><span data-lang="be">Гуллівы і прышчэплены</span></span>
-    </div>
-    <!-- Card 3 -->
-    <div class="pet-card">
-      <img class="pet-img" src="https://images.pexels.com/photos/2317904/pexels-photo-2317904.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Parrot" loading="lazy">
-      <h3>
-        <span data-lang="en" class="active-lang">Parrot</span>
-        <span data-lang="es">Loro</span><span data-lang="fr">Perroquet</span><span data-lang="ru">Попугай</span>
-        <span data-lang="pl">Papuga</span><span data-lang="cs">Papoušek</span><span data-lang="sk">Papagáj</span>
-        <span data-lang="uk">Папуга</span><span data-lang="sr">Papagaj</span><span data-lang="hr">Papiga</span>
-        <span data-lang="bg">Папагал</span><span data-lang="sl">Papiga</span><span data-lang="mk">Папагал</span>
-        <span data-lang="be">Папугай</span>
-      </h3>
-      <p><span data-lang="en" class="active-lang">Colorful Macaw</span><span data-lang="es">Guacamayo colorido</span><span data-lang="fr">Ara coloré</span><span data-lang="ru">Попугай ара</span><span data-lang="pl">Ara kolorowa</span><span data-lang="cs">Ara pestrý</span><span data-lang="sk">Ara pestrý</span><span data-lang="uk">Різнобарвний ара</span><span data-lang="sr">Šarena ara</span><span data-lang="hr">Šarena ara</span><span data-lang="bg">Пъстра ара</span><span data-lang="sl">Pisana ara</span><span data-lang="mk">Шарена ара</span><span data-lang="be">Стракаты ара</span></p>
-      <span class="badge"><span data-lang="en" class="active-lang">Talks & whistles</span><span data-lang="es">Habla y silba</span><span data-lang="fr">Parle et siffle</span><span data-lang="ru">Говорит и свистит</span><span data-lang="pl">Mówi i gwiżdże</span><span data-lang="cs">Mluví a píská</span><span data-lang="sk">Hovorí a píska</span><span data-lang="uk">Говорить і свистить</span><span data-lang="sr">Priča i zviždi</span><span data-lang="hr">Priča i zviždi</span><span data-lang="bg">Говори и свири</span><span data-lang="sl">Govori in žvižga</span><span data-lang="mk">Зборува и свирка</span><span data-lang="be">Размаўляе і свішча</span></span>
-    </div>
-    <!-- Card 4 -->
-    <div class="pet-card">
-      <img class="pet-img" src="https://images.pexels.com/photos/326012/pexels-photo-326012.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Rabbit" loading="lazy">
-      <h3>
-        <span data-lang="en" class="active-lang">Rabbit</span>
-        <span data-lang="es">Conejo</span><span data-lang="fr">Lapin</span><span data-lang="ru">Кролик</span>
-        <span data-lang="pl">Królik</span><span data-lang="cs">Králík</span><span data-lang="sk">Králik</span>
-        <span data-lang="uk">Кролик</span><span data-lang="sr">Zec</span><span data-lang="hr">Zec</span>
-        <span data-lang="bg">Заек</span><span data-lang="sl">Zajec</span><span data-lang="mk">Зајак</span>
-        <span data-lang="be">Трус</span>
-      </h3>
-      <p><span data-lang="en" class="active-lang">Holland Lop</span><span data-lang="es">Holland Lop</span><span data-lang="fr">Holland Lop</span><span data-lang="ru">Голландский вислоухий</span><span data-lang="pl">Holland lop</span><span data-lang="cs">Holland lop</span><span data-lang="sk">Holland lop</span><span data-lang="uk">Голландський висловухий</span><span data-lang="sr">Holandski ovčar</span><span data-lang="hr">Holandski lop</span><span data-lang="bg">Холандски лоп</span><span data-lang="sl">Holland lop</span><span data-lang="mk">Холандски лоп</span><span data-lang="be">Галандскі віславухі</span></p>
-      <span class="badge"><span data-lang="en" class="active-lang">Cuddly friend</span><span data-lang="es">Amigo mimoso</span><span data-lang="fr">Ami câlin</span><span data-lang="ru">Ласковый друг</span><span data-lang="pl">Przytulny przyjaciel</span><span data-lang="cs">Mazlivý přítel</span><span data-lang="sk">Maznavý priateľ</span><span data-lang="uk">Ніжний друг</span><span data-lang="sr">Mazan prijatelj</span><span data-lang="hr">Mazan prijatelj</span><span data-lang="bg">Гальовен приятел</span><span data-lang="sl">Crkljiv prijatelj</span><span data-lang="mk">Гальовен пријател</span><span data-lang="be">Ласкавы сябар</span></span>
-    </div>
-  </div>
+    <nav class="glass-nav fixed w-full z-40 shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fas fa-paw text-3xl text-blue-600 mr-2"></i>
+                    <span class="font-bold text-2xl tracking-tight text-gray-900">Bianka <span class="text-blue-600">Animalier</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-gray-600 hover:text-blue-600 font-medium transition" data-key="nav_home">Home</a>
+                    <a href="#services" class="text-gray-600 hover:text-blue-600 font-medium transition" data-key="nav_services">Services</a>
+                    <a href="#fleet" class="text-gray-600 hover:text-blue-600 font-medium transition" data-key="nav_fleet">Our Fleet</a>
+                    <a href="#reviews" class="text-gray-600 hover:text-blue-600 font-medium transition" data-key="nav_reviews">Reviews</a>
+                    <a href="#track" class="text-gray-600 hover:text-blue-600 font-medium transition" data-key="nav_track">Track Order</a>
+                    <a href="#faq" class="text-gray-600 hover:text-blue-600 font-medium transition" data-key="nav_faq">FAQ</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button onclick="toggleLangDropdown()" class="flex items-center space-x-1 text-gray-600 hover:text-blue-600 font-medium"><i class="fas fa-globe"></i><span id="current-lang">EN</span><i class="fas fa-chevron-down text-xs"></i></button>
+                        <div id="lang-dropdown" class="lang-dropdown absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl py-2 border border-gray-100 max-h-60 overflow-y-auto z-50"><div id="language-list" class="flex flex-col"></div></div>
+                    </div>
+                    <a href="https://wa.me/385976479350" target="_blank" class="hidden sm:flex bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition shadow-lg items-center gap-2"><i class="fab fa-whatsapp"></i><span data-key="btn_chat">Chat Now</span></a>
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-600 text-2xl"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100"><div class="px-4 py-4 space-y-3"><a href="#home" onclick="toggleMobileMenu()" class="block text-gray-600 hover:text-blue-600 font-medium" data-key="nav_home">Home</a><a href="#services" onclick="toggleMobileMenu()" class="block text-gray-600 hover:text-blue-600 font-medium" data-key="nav_services">Services</a><a href="#fleet" onclick="toggleMobileMenu()" class="block text-gray-600 hover:text-blue-600 font-medium" data-key="nav_fleet">Our Fleet</a><a href="#reviews" onclick="toggleMobileMenu()" class="block text-gray-600 hover:text-blue-600 font-medium" data-key="nav_reviews">Reviews</a><a href="#track" onclick="toggleMobileMenu()" class="block text-gray-600 hover:text-blue-600 font-medium" data-key="nav_track">Track Order</a><a href="#faq" onclick="toggleMobileMenu()" class="block text-gray-600 hover:text-blue-600 font-medium" data-key="nav_faq">FAQ</a><a href="https://wa.me/385976479350" target="_blank" class="block bg-green-500 text-white text-center py-2 rounded-full font-medium"><i class="fab fa-whatsapp mr-1"></i> <span data-key="footer_whatsapp_number">WhatsApp: +385 97 647 9350</span></a><a href="mailto:Biankaanimalier@gmail.com" class="block bg-gray-700 text-white text-center py-2 rounded-full font-medium"><i class="fas fa-envelope mr-1"></i> Biankaanimalier@gmail.com</a></div></div>
+    </nav>
 
-  <!-- Features -->
-  <div class="features">
-    <div class="feature-item"><i class="fas fa-truck"></i><br>
-      <span data-lang="en" class="active-lang">Global delivery</span>
-      <span data-lang="es">Envío global</span><span data-lang="fr">Livraison mondiale</span>
-      <span data-lang="ru">Доставка по миру</span><span data-lang="pl">Dostawa globalna</span>
-      <span data-lang="cs">Globální doručení</span><span data-lang="sk">Globálne doručenie</span>
-      <span data-lang="uk">Глобальна доставка</span><span data-lang="sr">Globalna dostava</span>
-      <span data-lang="hr">Globalna dostava</span><span data-lang="bg">Глобална доставка</span>
-      <span data-lang="sl">Globalna dostava</span><span data-lang="mk">Глобална достава</span>
-      <span data-lang="be">Глабальная дастаўка</span>
-    </div>
-    <div class="feature-item"><i class="fas fa-shield-alt"></i><br>
-      <span data-lang="en" class="active-lang">Vet checked</span>
-      <span data-lang="es">Revisado por vet</span><span data-lang="fr">Contrôle vétérinaire</span>
-      <span data-lang="ru">Осмотр ветеринара</span><span data-lang="pl">Sprawdzony wet.</span>
-      <span data-lang="cs">Veterinární kontrola</span><span data-lang="sk">Veterinárna kontrola</span>
-      <span data-lang="uk">Огляд ветеринара</span><span data-lang="sr">Veterinarski pregled</span>
-      <span data-lang="hr">Veterinarski pregled</span>
-      <span data-lang="bg">Ветеринарен преглед</span>
-      <span data-lang="sl">Veterinarski pregled</span>
-      <span data-lang="mk">Ветеринарен преглед</span>
-      <span data-lang="be">Ветэрынарны агляд</span>
-    </div>
-    <div class="feature-item"><i class="fas fa-thermometer-half"></i><br>
-      <span data-lang="en" class="active-lang">Climate control</span>
-      <span data-lang="es">Climatización</span><span data-lang="fr">Climatisation</span>
-      <span data-lang="ru">Климат-контроль</span><span data-lang="pl">Kontrola klimatu</span>
-      <span data-lang="cs">Klimatizace</span><span data-lang="sk">Klimatizácia</span>
-      <span data-lang="uk">Клімат-контроль</span><span data-lang="sr">Kontrola klime</span><span data-lang="hr">Kontrola klime</span>
-      <span data-lang="bg">Климатичен контрол</span><span data-lang="sl">Nadzor klime</span><span data-lang="mk">Клима контрола</span>
-      <span data-lang="be">Клімат-кантроль</span>
-    </div>
-  </div>
+    <!-- Hero Section - Image 1 for hero background, Image 2 for hero side image -->
+    <section id="home" class="pt-32 pb-20 lg:pt-40 lg:pb-28 hero-gradient text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://kimi-web-img.moonshot.cn/img/wp.vquip.com.au/b2ded7a28d12f9f8eeaec58f112e22853449403b.jpg')] bg-cover bg-center"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"><div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"><div class="fade-in"><div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-semibold mb-6 border border-white/30"><i class="fas fa-shield-alt mr-2"></i> <span data-key="hero_badge">Licensed & Insured Across Europe</span></div><h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6" data-key="hero_title">Pet Delivery<br>Experts.</h1><p class="text-lg md:text-xl text-gray-100 mb-8 max-w-lg" data-key="hero_subtitle">Europe's trusted pet delivery service.</p><div class="flex flex-col sm:flex-row gap-4"><a href="https://wa.me/385976479350" target="_blank" class="bg-green-500 text-white px-8 py-4 rounded-full font-bold hover:bg-green-600 transition shadow-lg text-center"><i class="fab fa-whatsapp mr-2"></i> <span data-key="btn_chat">Chat Now</span></a></div></div><div class="hidden lg:block relative"><img src="https://kimi-web-img.moonshot.cn/img/dtboxes.co.uk/ebce72199fcac67db9a2e4ce78ab6d5a05c73390.jpg" alt="Pet Transport" class="rounded-3xl shadow-2xl transform rotate-3 hover:rotate-0 transition duration-500 border-4 border-white/30"><div class="absolute -bottom-10 -left-10 bg-white p-4 rounded-xl shadow-xl text-gray-800 animate-bounce"><div class="flex items-center gap-3"><div class="bg-green-100 p-2 rounded-full text-green-600"><i class="fas fa-check"></i></div><div><p class="text-xs text-gray-500" data-key="latest_delivery">Latest Delivery</p><p class="font-bold">Paris, France</p></div></div></div></div></div></div>
+    </section>
 
-  <div class="footer">
-    <i class="fas fa-heart" style="color:#e67e22"></i> 
-    <span data-lang="en" class="active-lang">PetGlobe · delivering happiness since 2012</span>
-    <span data-lang="es">PetGlobe · entregando felicidad desde 2012</span>
-    <span data-lang="fr">PetGlobe · livrer du bonheur depuis 2012</span>
-    <span data-lang="ru">PetGlobe · доставляем счастье с 2012</span>
-    <span data-lang="pl">PetGlobe · dostarczamy szczęście od 2012</span>
-    <span data-lang="cs">PetGlobe · doručujeme štěstí od roku 2012</span>
-    <span data-lang="sk">PetGlobe · doručujeme šťastie od 2012</span>
-    <span data-lang="uk">PetGlobe · доставляємо щастя з 2012</span>
-    <span data-lang="sr">PetGlobe · isporučujemo sreću od 2012</span>
-    <span data-lang="hr">PetGlobe · dostavljamo sreću od 2012</span>
-    <span data-lang="bg">PetGlobe · доставяме щастие от 2012</span>
-    <span data-lang="sl">PetGlobe · dostavljamo srečo od 2012</span>
-    <span data-lang="mk">PetGlobe · доставуваме среќа од 2012</span>
-    <span data-lang="be">PetGlobe · дастаўляем шчасце з 2012</span>
-  </div>
-</div>
+    <section class="py-10 bg-white shadow-sm relative z-20 -mt-10 mx-4 rounded-2xl max-w-7xl lg:mx-auto border border-gray-100"><div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100"><div><p class="text-3xl font-bold text-blue-600">15+</p><p class="text-sm text-gray-500 mt-1" data-key="stat_countries">Countries Covered</p></div><div><p class="text-3xl font-bold text-blue-600">500+</p><p class="text-sm text-gray-500 mt-1" data-key="stat_pets">Pets Delivered</p></div><div><p class="text-3xl font-bold text-blue-600">100%</p><p class="text-sm text-gray-500 mt-1" data-key="stat_safety">Safety Record</p></div><div><p class="text-3xl font-bold text-blue-600">24/7</p><p class="text-sm text-gray-500 mt-1" data-key="stat_support">Live Support</p></div></div></section>
 
-<script>
-  (function() {
-    const langSelect = document.getElementById('languageSwitcher');
-    
-    function switchLanguage(lang) {
-      document.querySelectorAll('[data-lang]').forEach(el => el.classList.remove('active-lang'));
-      document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => el.classList.add('active-lang'));
-      document.documentElement.lang = lang;
-      localStorage.setItem('petglobe-lang', lang);
-    }
-    
-    langSelect.addEventListener('change', (e) => switchLanguage(e.target.value));
-    
-    const storedLang = localStorage.getItem('petglobe-lang');
-    if (storedLang && langSelect.querySelector(`option[value="${storedLang}"]`)) {
-      langSelect.value = storedLang;
-      switchLanguage(storedLang);
-    } else {
-      switchLanguage('en');
-    }
+    <section id="services" class="py-20 bg-gray-50"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="text-center mb-16"><h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-key="services_title">How We Deliver</h2><p class="text-gray-600 max-w-2xl mx-auto" data-key="services_subtitle">From pickup to doorstep, we treat every pet like our own family member.</p></div><div class="grid grid-cols-1 md:grid-cols-3 gap-8"><div class="bg-white p-8 rounded-2xl shadow-lg card-hover"><div class="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg"><i class="fas fa-hand-holding-heart"></i></div><h3 class="text-xl font-bold mb-3" data-key="step1_title">1. Gentle Pickup</h3><p class="text-gray-600" data-key="step1_desc">Our trained agents collect your pet with care.</p></div><div class="bg-white p-8 rounded-2xl shadow-lg card-hover"><div class="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg"><i class="fas fa-truck"></i></div><h3 class="text-xl font-bold mb-3" data-key="step2_title">2. Safe Transport</h3><p class="text-gray-600" data-key="step2_desc">Climate-controlled vehicles with regular stops.</p></div><div class="bg-white p-8 rounded-2xl shadow-lg card-hover"><div class="w-14 h-14 bg-green-600 rounded-xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg"><i class="fas fa-home"></i></div><h3 class="text-xl font-bold mb-3" data-key="step3_title">3. Happy Arrival</h3><p class="text-gray-600" data-key="step3_desc">Door-to-door delivery. Your pet comfortable and happy.</p></div></div></div></section>
 
-    // 📋 COPY EMAIL
-    const copyBtn = document.getElementById('copyEmailBtn');
-    const feedback = document.getElementById('copyFeedback');
-    const email = 'Biankaanimalier@gmail.com';
-    
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(email).then(() => {
-        feedback.style.opacity = '1';
-        setTimeout(() => feedback.style.opacity = '0', 1500);
-      }).catch(() => {
-        const textArea = document.createElement('textarea');
-        textArea.value = email;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        feedback.style.opacity = '1';
-        setTimeout(() => feedback.style.opacity = '0', 1500);
-      });
-    });
-  })();
-</script>
+    <!-- Fleet Section - Images 3,4,5,6,7,8 for fleet -->
+    <section id="fleet" class="py-20 bg-white"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2" data-key="fleet_title">Our Pet Delivery Fleet</h2><p class="text-gray-600" data-key="fleet_subtitle">Specialized vehicles for safe pet transport across Europe.</p></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="fleet-container"></div></div></section>
 
-<div style="text-align:center; margin-top:1.2rem; font-size:0.85rem; opacity:0.65;">
-  🌍· Contact: Biankaanimalier@gmail.com
-</div>
+    <!-- Reviews Section - ORIGINAL review avatar images restored -->
+    <section id="reviews" class="py-20 bg-blue-50"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2" data-key="reviews_title">What Our Customers Say</h2><p class="text-gray-600" data-key="reviews_subtitle">Trusted by pet owners across Europe.</p></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="reviews-container"></div></div></section>
+
+    <section id="track" class="py-20 bg-gray-900 text-white relative overflow-hidden"><div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div><div class="max-w-4xl mx-auto px-4 relative z-10"><div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold mb-4" data-key="track_title">Track Your Delivery</h2><p class="text-gray-400" data-key="track_subtitle">Enter your Transport ID to see real-time status.</p></div><div class="bg-white/10 backdrop-blur-md p-2 rounded-full flex shadow-2xl border border-white/20 max-w-lg mx-auto mb-12"><input type="text" id="tracking-input" data-key="track_placeholder" data-placeholder="true" placeholder="Enter Transport ID (e.g., BA-12345)" class="bg-transparent border-none text-white placeholder-gray-400 px-6 py-3 w-full focus:outline-none font-mono"><button onclick="trackOrder()" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-full font-bold transition"><i class="fas fa-search mr-2"></i> <span data-key="btn_track">Track</span></button></div><div id="tracking-result" class="hidden bg-white text-gray-800 rounded-2xl p-8 shadow-2xl fade-in"><div class="flex justify-between items-start mb-6 border-b pb-4"><div><p class="text-sm text-gray-500 uppercase tracking-wide" data-key="track_status_label">Transport Status</p><h3 class="text-2xl font-bold text-blue-600" id="track-status">In Transit</h3></div><div class="text-right"><p class="text-sm text-gray-500 uppercase tracking-wide" data-key="track_eta_label">Estimated Arrival</p><h3 class="text-xl font-bold text-gray-900" id="track-eta">2 Days</h3></div></div><div class="relative mb-8"><div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200"><div id="progress-bar" style="width:60%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-1000"></div></div><div class="flex justify-between text-xs font-semibold text-gray-500 uppercase"><span data-key="track_picked">Picked Up</span><span data-key="track_departed">Departed</span><span data-key="track_transit">Transit</span><span data-key="track_delivered">Delivered</span></div></div><div class="bg-gray-50 rounded-xl p-4 flex items-start gap-4"><div class="bg-blue-100 p-3 rounded-full text-blue-600 mt-1"><i class="fas fa-map-marker-alt"></i></div><div><p class="font-bold text-gray-900" data-key="track_current">Current Location</p><p class="text-gray-600" id="track-location">Vienna, Austria</p><p class="text-xs text-gray-400 mt-1" data-key="track_updated">Last updated: Just now</p></div></div></div></div></section>
+
+    <section id="faq" class="py-20 bg-gray-50"><div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"><div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-key="faq_title">Frequently Asked Questions</h2><p class="text-gray-600" data-key="faq_subtitle">Everything you need to know.</p></div><div class="space-y-4" id="faq-container"></div></div></section>
+
+    <footer class="bg-gray-900 text-white pt-16 pb-8"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12"><div><div class="flex items-center mb-4"><i class="fas fa-paw text-2xl text-blue-500 mr-2"></i><span class="font-bold text-xl">Bianka Animalier</span></div><p class="text-gray-400 text-sm leading-relaxed mb-6" data-key="footer_desc">Licensed across all EU states.</p><div class="flex space-x-4"><a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-facebook-f"></i></a><a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-instagram"></i></a><a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-twitter"></i></a></div></div><div><h4 class="font-bold text-lg mb-6" data-key="footer_links">Quick Links</h4><ul class="space-y-3 text-gray-400"><li><a href="#home" class="hover:text-white transition" data-key="nav_home">Home</a></li><li><a href="#services" class="hover:text-white transition" data-key="nav_services">Services</a></li><li><a href="#fleet" class="hover:text-white transition" data-key="nav_fleet">Our Fleet</a></li><li><a href="#reviews" class="hover:text-white transition" data-key="nav_reviews">Reviews</a></li></ul></div><div><h4 class="font-bold text-lg mb-6" data-key="footer_contact">Contact Us</h4><ul class="space-y-4 text-gray-400"><li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-500"></i><span data-key="footer_eu">Operating across all EU States</span></li><li class="flex items-center"><i class="fab fa-whatsapp mr-3 text-green-500"></i><a href="https://wa.me/385976479350" target="_blank" class="hover:text-white transition" data-key="footer_whatsapp_number">WhatsApp: +385 97 647 9350</a></li><li class="flex items-center"><i class="fas fa-envelope mr-3 text-blue-500"></i><a href="mailto:Biankaanimalier@gmail.com" class="hover:text-white transition">Biankaanimalier@gmail.com</a></li></ul></div><div class="bg-gray-800 p-6 rounded-xl"><h4 class="font-bold text-lg mb-2" data-key="footer_urgent">Need Urgent Help?</h4><p class="text-gray-400 text-sm mb-4" data-key="footer_whatsapp">Chat on WhatsApp for instant replies.</p><a href="https://wa.me/385976479350" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white text-center py-3 rounded-lg font-bold transition"><i class="fab fa-whatsapp mr-2"></i> <span data-key="btn_chat">Start Chat</span></a></div></div><div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center"><p class="text-gray-500 text-sm">© Bianka Animalier. All rights reserved.</p><div class="flex space-x-6 text-sm text-gray-500 mt-4 md:mt-0"><a href="#" class="hover:text-white" data-key="footer_privacy">Privacy Policy</a><a href="#" class="hover:text-white" data-key="footer_terms">Terms of Service</a></div></div></div></footer>
+
+    <a href="https://wa.me/385976479350" target="_blank" class="whatsapp-float w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl shadow-2xl hover:bg-green-600 transition"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        const languages = {
+            en: { name: "English", flag: "🇬🇧" }, bg: { name: "Български", flag: "🇧🇬" }, hr: { name: "Hrvatski", flag: "🇭🇷" },
+            cs: { name: "Čeština", flag: "🇨🇿" }, da: { name: "Dansk", flag: "🇩🇰" }, nl: { name: "Nederlands", flag: "🇳🇱" },
+            et: { name: "Eesti", flag: "🇪🇪" }, fi: { name: "Suomi", flag: "🇫🇮" }, fr: { name: "Français", flag: "🇫🇷" },
+            de: { name: "Deutsch", flag: "🇩🇪" }, el: { name: "Ελληνικά", flag: "🇬🇷" }, hu: { name: "Magyar", flag: "🇭🇺" },
+            ga: { name: "Gaeilge", flag: "🇮🇪" }, it: { name: "Italiano", flag: "🇮🇹" }, lv: { name: "Latviešu", flag: "🇱🇻" },
+            lt: { name: "Lietuvių", flag: "🇱🇹" }, mt: { name: "Malti", flag: "🇲🇹" }, pl: { name: "Polski", flag: "🇵🇱" },
+            pt: { name: "Português", flag: "🇵🇹" }, ro: { name: "Română", flag: "🇷🇴" }, sk: { name: "Slovenčina", flag: "🇸🇰" },
+            sl: { name: "Slovenščina", flag: "🇸🇮" }, es: { name: "Español", flag: "🇪🇸" }, sv: { name: "Svenska", flag: "🇸🇪" }
+        };
+
+        // Reviews with ORIGINAL Unsplash avatar images restored
+        const reviews = [
+            { stars: 5, text: "Bianka Animalier delivered my Golden Retriever puppy from Germany to Spain in perfect condition. The driver sent photos every few hours. Amazing service!", name: "Maria G.", location: "Madrid, Spain", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" },
+            { stars: 5, text: "I was nervous about shipping my cat across Europe, but the team was incredibly professional. The tracking feature gave me peace of mind.", name: "Thomas B.", location: "Vienna, Austria", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" },
+            { stars: 5, text: "Our two French Bulldogs arrived safely from Paris to Rome. The drivers clearly love animals. They even played with them during rest stops!", name: "Sophie L.", location: "Rome, Italy", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" },
+            { stars: 5, text: "Fast, reliable, and caring. My parrot arrived in Amsterdam from Lisbon with all the proper documentation handled perfectly.", name: "Jan D.", location: "Amsterdam, Netherlands", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" },
+            { stars: 5, text: "The WhatsApp updates were fantastic! I knew exactly where my puppy was at all times. From Warsaw to Berlin in just 2 days.", name: "Anna K.", location: "Berlin, Germany", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" },
+            { stars: 5, text: "Professional service from start to finish. They handled all the EU pet passport paperwork and delivered my dog safely to Copenhagen.", name: "Lars N.", location: "Copenhagen, Denmark", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" }
+        ];
+
+        // Fleet images using your provided URLs 3-8
+        const fleetImages = [
+            { img: "https://kimi-web-img.moonshot.cn/img/img.kwcdn.com/5934cfc6e700c26f13a0e81f0284f509b66dfd4f.png", fallback: "https://kimi-web-img.moonshot.cn/img/img.kwcdn.com/5934cfc6e700c26f13a0e81f0284f509b66dfd4f.png", titleKey: "fleet_van", descKey: "fleet_van_desc" },
+            { img: "https://kimi-web-img.moonshot.cn/img/airpets.com/d371c13b6b501e99095a466b9055547911a06b8d.jpg", fallback: "https://kimi-web-img.moonshot.cn/img/airpets.com/d371c13b6b501e99095a466b9055547911a06b8d.jpg", titleKey: "fleet_agent", descKey: "fleet_agent_desc" },
+            { img: "https://kimi-web-img.moonshot.cn/img/wp.vquip.com.au/25cd01a26c9e181062c1830746b40831a39891ac.jpg", fallback: "https://kimi-web-img.moonshot.cn/img/wp.vquip.com.au/25cd01a26c9e181062c1830746b40831a39891ac.jpg", titleKey: "fleet_carrier", descKey: "fleet_carrier_desc" },
+            { img: "https://kimi-web-img.moonshot.cn/img/www.adeopets.com/4731eeb6a0f683b0ec4ff7d93c7c3138123821f3.jpg", fallback: "https://kimi-web-img.moonshot.cn/img/www.adeopets.com/4731eeb6a0f683b0ec4ff7d93c7c3138123821f3.jpg", titleKey: "fleet_truck", descKey: "fleet_truck_desc" },
+            { img: "https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/d86e83c6259ea4230bd89233cb46d53bc04da2a0.jpg", fallback: "https://kimi-web-img.moonshot.cn/img/m.media-amazon.com/d86e83c6259ea4230bd89233cb46d53bc04da2a0.jpg", titleKey: "fleet_door", descKey: "fleet_door_desc" },
+            { img: "https://kimi-web-img.moonshot.cn/img/tgs-group.com/83928ff9dfd809a38f2f5e0f9f63b4279d6bd743.jpg", fallback: "https://kimi-web-img.moonshot.cn/img/tgs-group.com/83928ff9dfd809a38f2f5e0f9f63b4279d6bd743.jpg", titleKey: "fleet_happy", descKey: "fleet_happy_desc" }
+        ];
+
+        function buildTranslations() {
+            const en = {
+                modal_welcome: "Welcome!", modal_detected_prefix: "We detected your location. Would you like to switch to", modal_yes: "Yes, switch", modal_no: "Stay in English",
+                cookie_text: "We use cookies to enhance your experience.", cookie_accept: "Accept", cookie_decline: "Decline",
+                nav_home: "Home", nav_services: "Services", nav_fleet: "Our Fleet", nav_reviews: "Reviews", nav_track: "Track Order", nav_faq: "FAQ",
+                btn_chat: "Chat Now", btn_track: "Track",
+                hero_badge: "Licensed & Insured Across Europe", hero_title: "Pet Delivery<br>Experts.", hero_subtitle: "Europe's trusted pet delivery service. We safely transport your furry family members with love, care, and real-time tracking across all EU countries.",
+                latest_delivery: "Latest Delivery",
+                stat_countries: "Countries Covered", stat_pets: "Pets Delivered", stat_safety: "Safety Record", stat_support: "Live Support",
+                services_title: "How We Deliver", services_subtitle: "From pickup to doorstep, we treat every pet like our own family member.",
+                step1_title: "1. Gentle Pickup", step1_desc: "Our trained agents collect your pet with care, using comfortable carriers and a calming approach.",
+                step2_title: "2. Safe Transport", step2_desc: "Climate-controlled vehicles with regular stops. We send photo updates every step of the journey.",
+                step3_title: "3. Happy Arrival", step3_desc: "Door-to-door delivery. We make sure your pet is comfortable and happy before we leave.",
+                fleet_title: "Our Pet Delivery Fleet", fleet_subtitle: "Specialized vehicles designed for safe and comfortable pet transport across Europe.",
+                fleet_van: "Pet Delivery Van", fleet_van_desc: "Climate controlled & GPS tracked",
+                fleet_agent: "Professional Agents", fleet_agent_desc: "Trained pet handlers for every delivery",
+                fleet_carrier: "Secure Carriers", fleet_carrier_desc: "IATA approved travel crates",
+                fleet_truck: "Long Distance Trucks", fleet_truck_desc: "For cross-country pet moves",
+                fleet_door: "Door-to-Door Service", fleet_door_desc: "We bring pets to your home",
+                fleet_happy: "Happy Arrivals", fleet_happy_desc: "Safe and stress-free delivery",
+                reviews_title: "What Our Customers Say", reviews_subtitle: "Trusted by pet owners across Europe for safe and reliable delivery.",
+                track_title: "Track Your Delivery", track_subtitle: "Enter your Transport ID to see the real-time status of your pet's journey.",
+                track_placeholder: "Enter Transport ID (e.g., BA-12345)", track_status_label: "Transport Status", track_eta_label: "Estimated Arrival",
+                track_picked: "Picked Up", track_departed: "Departed", track_transit: "Transit", track_delivered: "Delivered",
+                track_current: "Current Location", track_updated: "Last updated: Just now",
+                faq_title: "Frequently Asked Questions", faq_subtitle: "Everything you need to know about our pet delivery services.",
+                faq: [{ q: "Is pet transport safe?", a: "Absolutely. We use specialized climate-controlled vehicles and partner with licensed veterinary professionals." }, { q: "Do you handle paperwork?", a: "Yes, we handle all necessary documentation including EU Pet Passports, health certificates, and customs clearance." }, { q: "How long does transport take?", a: "Delivery times vary based on distance. Typically 2-5 business days within the EU with real-time tracking." }, { q: "Do you sell pets?", a: "No, Bianka Animalier is strictly a logistics and transport company. We do not sell animals." }, { q: "Can I track my pet?", a: "Yes! We provide GPS tracking and regular photo updates via WhatsApp." }, { q: "What areas do you cover?", a: "All 27 EU member states, plus Switzerland, Norway, and the United Kingdom." }, { q: "How do I book?", a: "Contact us via WhatsApp at +385 97 647 9350 or email Biankaanimalier@gmail.com." }, { q: "Do you offer insurance?", a: "Yes, all transports are fully insured with comprehensive coverage." }],
+                footer_desc: "Licensed and permitted to operate across all European Union member states. Your trusted partner in pet delivery and safe relocation.",
+                footer_links: "Quick Links", footer_contact: "Contact Us", footer_eu: "Operating across all EU States",
+                footer_whatsapp_number: "WhatsApp: +385 97 647 9350",
+                footer_urgent: "Need Urgent Help?", footer_whatsapp: "Chat with us directly on WhatsApp for instant replies regarding your delivery.",
+                footer_privacy: "Privacy Policy", footer_terms: "Terms of Service"
+            };
+
+            const t = {
+                bg: { modal_welcome: "Добре дошли!", modal_detected_prefix: "Открихме вашето местоположение. Искате ли да превключите на", modal_yes: "Да, превключи", modal_no: "Останете на английски", cookie_text: "Използваме бисквитки.", cookie_accept: "Приемам", cookie_decline: "Отказвам", nav_home: "Начало", nav_services: "Услуги", nav_fleet: "Нашият автопарк", nav_reviews: "Отзиви", nav_track: "Проследяване", nav_faq: "ЧЗВ", btn_chat: "Чат сега", btn_track: "Проследи", hero_badge: "Лицензирани и застраховани в цяла Европа", hero_title: "Експерти по доставка<br>на домашни любимци.", hero_subtitle: "Доверената услуга за доставка на домашни любимци в Европа.", latest_delivery: "Последна доставка", stat_countries: "Обслужвани държави", stat_pets: "Доставени любимци", stat_safety: "Рекорд по безопасност", stat_support: "Поддръжка на живо", services_title: "Как доставяме", services_subtitle: "От вземането до прага, третираме всеки домашен любимец като наш собствен.", step1_title: "1. Нежно вземане", step1_desc: "Нашите обучени агенти вземат вашия домашен любимец с грижа.", step2_title: "2. Безопасен транспорт", step2_desc: "Климатизирани превозни средства с редовни спирки.", step3_title: "3. Щастливо пристигане", step3_desc: "Доставка от врата до врата.", fleet_title: "Нашият автопарк за доставка", fleet_subtitle: "Специализирани превозни средства за безопасен транспорт в цяла Европа.", fleet_van: "Ван за доставка", fleet_van_desc: "Климатизиран и с GPS", fleet_agent: "Професионални агенти", fleet_agent_desc: "Обучени водачи за всяка доставка", fleet_carrier: "Сигурни преносители", fleet_carrier_desc: "Одобрени от IATA кафези", fleet_truck: "Камиони за дълги разстояния", fleet_truck_desc: "За междуградски премествания", fleet_door: "От врата до врата", fleet_door_desc: "Доставяме до вашия дом", fleet_happy: "Щастливи пристигания", fleet_happy_desc: "Безопасна доставка без стрес", reviews_title: "Какво казват клиентите", reviews_subtitle: "Доверени в цяла Европа.", track_title: "Проследете доставката", track_subtitle: "Въведете ID за проследяване.", track_placeholder: "Въведете транспортен ID (напр. BA-12345)", track_status_label: "Статус", track_eta_label: "Очаквано пристигане", track_picked: "Взето", track_departed: "Заминало", track_transit: "В транзит", track_delivered: "Доставено", track_current: "Текущо местоположение", track_updated: "Актуализирано току-що", faq_title: "Често задавани въпроси", faq_subtitle: "Всичко за нашите услуги.", faq: [{ q: "Безопасен ли е транспортът?", a: "Абсолютно. Използваме специализирани климатизирани превозни средства." }, { q: "Обработвате ли документация?", a: "Да, обработваме всички необходими документи." }, { q: "Колко време отнема?", a: "2-5 работни дни в ЕС с проследяване в реално време." }, { q: "Продавате ли любимци?", a: "Не, ние сме само транспортна компания." }, { q: "Мога ли да проследявам?", a: "Да! GPS проследяване и снимки чрез WhatsApp." }, { q: "Какви области покривате?", a: "Всички 27 държави от ЕС, Швейцария, Норвегия и Обединеното кралство." }, { q: "Как да резервирам?", a: "Свържете се чрез WhatsApp на +385 97 647 9350 или имейл." }, { q: "Предлагате ли застраховка?", a: "Да, всички транспорти са напълно застраховани." }], footer_desc: "Лицензирани в целия ЕС. Вашият доверен партньор.", footer_links: "Бързи връзки", footer_contact: "Контакт", footer_eu: "Работим в целия ЕС", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Спешна помощ?", footer_whatsapp: "Чат с нас директно в WhatsApp.", footer_privacy: "Поверителност", footer_terms: "Условия" },
+                hr: { modal_welcome: "Dobrodošli!", modal_detected_prefix: "Otkrili smo vašu lokaciju. Želite li se prebaciti na", modal_yes: "Da, prebaci", modal_no: "Ostanite na engleskom", cookie_text: "Koristimo kolačiće.", cookie_accept: "Prihvati", cookie_decline: "Odbij", nav_home: "Početna", nav_services: "Usluge", nav_fleet: "Vozni park", nav_reviews: "Recenzije", nav_track: "Praćenje", nav_faq: "FAQ", btn_chat: "Chat sada", btn_track: "Prati", hero_badge: "Licencirani i osigurani u cijeloj Europi", hero_title: "Stručnjaci za dostavu<br>kućnih ljubimaca.", hero_subtitle: "Pouzdana dostava ljubimaca u Europi.", latest_delivery: "Posljednja dostava", stat_countries: "Pokrivene zemlje", stat_pets: "Dostavljeni ljubimci", stat_safety: "Sigurnosni rekord", stat_support: "Podrška uživo", services_title: "Kako dostavljamo", services_subtitle: "Od preuzimanja do vrata, svaki ljubimac je kao član obitelji.", step1_title: "1. Nježno preuzimanje", step1_desc: "Naši agenti preuzimaju ljubimca s pažnjom.", step2_title: "2. Siguran prijevoz", step2_desc: "Klimatizirana vozila s redovitim zaustavljanjima.", step3_title: "3. Sretan dolazak", step3_desc: "Dostava od vrata do vrata.", fleet_title: "Naš vozni park", fleet_subtitle: "Specijalizirana vozila za siguran transport.", fleet_van: "Kombi za dostavu", fleet_van_desc: "Klimatiziran i GPS praćen", fleet_agent: "Profesionalni agenti", fleet_agent_desc: "Obučeni rukovatelji", fleet_carrier: "Sigurni transporteri", fleet_carrier_desc: "IATA odobreni kavezi", fleet_truck: "Kamioni za duge relacije", fleet_truck_desc: "Za međugradske selidbe", fleet_door: "Od vrata do vrata", fleet_door_desc: "Dovodimo ljubimce do vašeg doma", fleet_happy: "Sretni dolasci", fleet_happy_desc: "Sigurna dostava bez stresa", reviews_title: "Što klijenti kažu", reviews_subtitle: "Povjerenje diljem Europe.", track_title: "Pratite dostavu", track_subtitle: "Unesite transportni ID.", track_placeholder: "Unesite ID (npr. BA-12345)", track_status_label: "Status", track_eta_label: "Procijenjeni dolazak", track_picked: "Preuzeto", track_departed: "Krenulo", track_transit: "U tranzitu", track_delivered: "Dostavljeno", track_current: "Trenutna lokacija", track_updated: "Ažurirano upravo sada", faq_title: "Česta pitanja", faq_subtitle: "Sve o našim uslugama.", faq: [{ q: "Je li prijevoz siguran?", a: "Apsolutno. Specijalizirana klimatizirana vozila." }, { q: "Rješavate li papirologiju?", a: "Da, sva potrebna dokumentacija." }, { q: "Koliko traje?", a: "2-5 radnih dana unutar EU." }, { q: "Prodajete li ljubimce?", a: "Ne, samo logistika i transport." }, { q: "Mogu li pratiti?", a: "Da! GPS i WhatsApp fotografije." }, { q: "Koja područja?", a: "Svih 27 članica EU plus Švicarska, Norveška, UK." }, { q: "Kako rezervirati?", a: "WhatsApp +385 97 647 9350 ili email." }, { q: "Nudite osiguranje?", a: "Da, potpuno osigurani transporti." }], footer_desc: "Licencirani u EU. Vaš pouzdani partner.", footer_links: "Brze veze", footer_contact: "Kontakt", footer_eu: "Djelujemo u cijeloj EU", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Hitna pomoć?", footer_whatsapp: "Chat na WhatsApp.", footer_privacy: "Privatnost", footer_terms: "Uvjeti" },
+                cs: { modal_welcome: "Vítejte!", modal_detected_prefix: "Zjistili jsme vaši polohu. Chcete přepnout na", modal_yes: "Ano", modal_no: "Zůstat v angličtině", cookie_text: "Používáme cookies.", cookie_accept: "Přijmout", cookie_decline: "Odmítnout", nav_home: "Domů", nav_services: "Služby", nav_fleet: "Vozový park", nav_reviews: "Recenze", nav_track: "Sledování", nav_faq: "FAQ", btn_chat: "Chatovat", btn_track: "Sledovat", hero_badge: "Licencováno a pojištěno v celé Evropě", hero_title: "Experti na přepravu<br>domácích mazlíčků.", hero_subtitle: "Důvěryhodná přeprava mazlíčků v Evropě.", latest_delivery: "Nejnovější doručení", stat_countries: "Pokryté země", stat_pets: "Doručení mazlíčci", stat_safety: "Bezpečnostní rekord", stat_support: "Živá podpora", services_title: "Jak doručujeme", services_subtitle: "Od vyzvednutí ke dveřím, každý mazlíček jako člen rodiny.", step1_title: "1. Šetrné vyzvednutí", step1_desc: "Naši agenti vyzvednou mazlíčka s péčí.", step2_title: "2. Bezpečná přeprava", step2_desc: "Klimatizovaná vozidla s pravidelnými zastávkami.", step3_title: "3. Šťastný příjezd", step3_desc: "Doručení od dveří ke dveřím.", fleet_title: "Náš vozový park", fleet_subtitle: "Specializovaná vozidla pro bezpečný transport.", fleet_van: "Dodávka", fleet_van_desc: "Klimatizovaná a GPS", fleet_agent: "Profesionální agenti", fleet_agent_desc: "Vyškolení psovodi", fleet_carrier: "Bezpečné přepravky", fleet_carrier_desc: "IATA schválené klece", fleet_truck: "Kamiony na dlouhé vzdálenosti", fleet_truck_desc: "Pro mezistátní stěhování", fleet_door: "Od dveří ke dveřím", fleet_door_desc: "Přinášíme mazlíčky k vám domů", fleet_happy: "Šťastné příjezdy", fleet_happy_desc: "Bezpečné a bezstresové", reviews_title: "Co říkají zákazníci", reviews_subtitle: "Důvěra po celé Evropě.", track_title: "Sledujte doručení", track_subtitle: "Zadejte přepravní ID.", track_placeholder: "Zadejte ID (např. BA-12345)", track_status_label: "Stav", track_eta_label: "Odhadovaný příjezd", track_picked: "Vyzvednuto", track_departed: "Odjelo", track_transit: "V tranzitu", track_delivered: "Doručeno", track_current: "Aktuální poloha", track_updated: "Aktualizováno právě teď", faq_title: "Časté dotazy", faq_subtitle: "Vše o našich službách.", faq: [{ q: "Je přeprava bezpečná?", a: "Absolutně. Specializovaná klimatizovaná vozidla." }, { q: "Vyřizujete dokumenty?", a: "Ano, veškerou potřebnou dokumentaci." }, { q: "Jak dlouho to trvá?", a: "2-5 pracovních dnů v rámci EU." }, { q: "Prodáváte mazlíčky?", a: "Ne, pouze logistika a doprava." }, { q: "Mohu sledovat?", a: "Ano! GPS a WhatsApp fotografie." }, { q: "Jaké oblasti?", a: "Všech 27 členských států EU plus Švýcarsko, Norsko, UK." }, { q: "Jak rezervovat?", a: "WhatsApp +385 97 647 9350 nebo email." }, { q: "Nabízíte pojištění?", a: "Ano, plně pojištěné přepravy." }], footer_desc: "Licencováno v EU. Váš důvěryhodný partner.", footer_links: "Rychlé odkazy", footer_contact: "Kontakt", footer_eu: "Působíme v celé EU", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Naléhavá pomoc?", footer_whatsapp: "Chat na WhatsApp.", footer_privacy: "Ochrana osobních údajů", footer_terms: "Podmínky" },
+                da: { modal_welcome: "Velkommen!", modal_detected_prefix: "Vi registrerede din placering. Vil du skifte til", modal_yes: "Ja", modal_no: "Forbliv på engelsk", cookie_text: "Vi bruger cookies.", cookie_accept: "Accepter", cookie_decline: "Afvis", nav_home: "Hjem", nav_services: "Tjenester", nav_fleet: "Flåde", nav_reviews: "Anmeldelser", nav_track: "Sporing", nav_faq: "FAQ", btn_chat: "Chat nu", btn_track: "Spor", hero_badge: "Licenseret og forsikret i hele Europa", hero_title: "Eksperter i<br>kæledyrstransport.", hero_subtitle: "Europas betroede kæledyrstransport.", latest_delivery: "Seneste levering", stat_countries: "Dækkede lande", stat_pets: "Leverede kæledyr", stat_safety: "Sikkerhedsrekord", stat_support: "Live support", services_title: "Sådan leverer vi", services_subtitle: "Fra afhentning til døren, hvert kæledyr som familie.", step1_title: "1. Skånsom afhentning", step1_desc: "Vores agenter afhenter dit kæledyr med omhu.", step2_title: "2. Sikker transport", step2_desc: "Klimakontrollerede køretøjer med regelmæssige stop.", step3_title: "3. Glad ankomst", step3_desc: "Dør-til-dør levering.", fleet_title: "Vores flåde", fleet_subtitle: "Specialkøretøjer til sikker transport.", fleet_van: "Varevogn", fleet_van_desc: "Klimakontrolleret og GPS", fleet_agent: "Professionelle agenter", fleet_agent_desc: "Uddannede førere", fleet_carrier: "Sikre bure", fleet_carrier_desc: "IATA godkendt", fleet_truck: "Langdistance lastbiler", fleet_truck_desc: "Til flytning på tværs af lande", fleet_door: "Dør-til-dør", fleet_door_desc: "Vi bringer kæledyr til dit hjem", fleet_happy: "Glade ankomster", fleet_happy_desc: "Sikker og stressfri", reviews_title: "Hvad kunderne siger", reviews_subtitle: "Tillid over hele Europa.", track_title: "Spor levering", track_subtitle: "Indtast dit transport-ID.", track_placeholder: "Indtast ID (f.eks. BA-12345)", track_status_label: "Status", track_eta_label: "Anslået ankomst", track_picked: "Afhentet", track_departed: "Afgået", track_transit: "Undervejs", track_delivered: "Leveret", track_current: "Nuværende placering", track_updated: "Opdateret lige nu", faq_title: "Ofte stillede spørgsmål", faq_subtitle: "Alt om vores tjenester.", faq: [{ q: "Er transport sikkert?", a: "Absolut. Specialiserede klimakontrollerede køretøjer." }, { q: "Håndterer I papirarbejde?", a: "Ja, al nødvendig dokumentation." }, { q: "Hvor lang tid tager det?", a: "2-5 arbejdsdage inden for EU." }, { q: "Sælger I kæledyr?", a: "Nej, kun logistik og transport." }, { q: "Kan jeg spore?", a: "Ja! GPS og WhatsApp fotos." }, { q: "Hvilke områder?", a: "Alle 27 EU-lande plus Schweiz, Norge, UK." }, { q: "Hvordan booker jeg?", a: "WhatsApp +385 97 647 9350 eller email." }, { q: "Tilbyder I forsikring?", a: "Ja, fuldt forsikrede transporter." }], footer_desc: "Licenseret i EU. Din betroede partner.", footer_links: "Hurtige links", footer_contact: "Kontakt", footer_eu: "Opererer i hele EU", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Akut hjælp?", footer_whatsapp: "Chat på WhatsApp.", footer_privacy: "Privatlivspolitik", footer_terms: "Vilkår" },
+                nl: { modal_welcome: "Welkom!", modal_detected_prefix: "We hebben uw locatie gedetecteerd. Wilt u overschakelen naar", modal_yes: "Ja", modal_no: "Blijf in het Engels", cookie_text: "We gebruiken cookies.", cookie_accept: "Accepteren", cookie_decline: "Weigeren", nav_home: "Home", nav_services: "Diensten", nav_fleet: "Vloot", nav_reviews: "Beoordelingen", nav_track: "Volgen", nav_faq: "FAQ", btn_chat: "Chat nu", btn_track: "Zoeken", hero_badge: "Gelicentieerd en verzekerd in heel Europa", hero_title: "Experts in<br>huisdierbezorging.", hero_subtitle: "Europa's vertrouwde huisdierbezorgservice.", latest_delivery: "Laatste bezorging", stat_countries: "Gedekte landen", stat_pets: "Bezorgde huisdieren", stat_safety: "Veiligheidsrecord", stat_support: "Live ondersteuning", services_title: "Hoe we bezorgen", services_subtitle: "Van ophalen tot aan de deur, elk huisdier als familie.", step1_title: "1. Zachtzinnig ophalen", step1_desc: "Onze agenten halen uw huisdier met zorg op.", step2_title: "2. Veilig vervoer", step2_desc: "Klimaatgecontroleerde voertuigen met regelmatige stops.", step3_title: "3. Blije aankomst", step3_desc: "Deur-tot-deur bezorging.", fleet_title: "Onze vloot", fleet_subtitle: "Speciale voertuigen voor veilig transport.", fleet_van: "Bestelbus", fleet_van_desc: "Klimaatgecontroleerd en GPS", fleet_agent: "Professionele agenten", fleet_agent_desc: "Getrainde begeleiders", fleet_carrier: "Veilige dragers", fleet_carrier_desc: "IATA goedgekeurd", fleet_truck: "Langeafstandsvrachtwagens", fleet_truck_desc: "Voor grensoverschrijdende verhuizingen", fleet_door: "Deur-tot-deur", fleet_door_desc: "We brengen huisdieren thuis", fleet_happy: "Blije aankomsten", fleet_happy_desc: "Veilig en stressvrij", reviews_title: "Wat klanten zeggen", reviews_subtitle: "Vertrouwd in heel Europa.", track_title: "Bezorging volgen", track_subtitle: "Voer uw transport-ID in.", track_placeholder: "Voer ID in (bijv. BA-12345)", track_status_label: "Status", track_eta_label: "Geschatte aankomst", track_picked: "Opgehaald", track_departed: "Vertrokken", track_transit: "Onderweg", track_delivered: "Bezorgd", track_current: "Huidige locatie", track_updated: "Bijgewerkt zojuist", faq_title: "Veelgestelde vragen", faq_subtitle: "Alles over onze diensten.", faq: [{ q: "Is vervoer veilig?", a: "Absoluut. Gespecialiseerde klimaatgecontroleerde voertuigen." }, { q: "Regelt u papierwerk?", a: "Ja, alle benodigde documentatie." }, { q: "Hoe lang duurt het?", a: "2-5 werkdagen binnen de EU." }, { q: "Verkoopt u huisdieren?", a: "Nee, alleen logistiek en transport." }, { q: "Kan ik volgen?", a: "Ja! GPS en WhatsApp foto's." }, { q: "Welke gebieden?", a: "Alle 27 EU-landen plus Zwitserland, Noorwegen, VK." }, { q: "Hoe boeken?", a: "WhatsApp +385 97 647 9350 of email." }, { q: "Biedt u verzekering?", a: "Ja, volledig verzekerd transport." }], footer_desc: "Gelicentieerd in de EU. Uw vertrouwde partner.", footer_links: "Snelle links", footer_contact: "Contact", footer_eu: "Actief in de hele EU", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Dringende hulp?", footer_whatsapp: "Chat op WhatsApp.", footer_privacy: "Privacybeleid", footer_terms: "Voorwaarden" },
+                et: { modal_welcome: "Tere tulemast!", modal_detected_prefix: "Tuvastasime teie asukoha. Kas soovite üle minna", modal_yes: "Jah", modal_no: "Jää inglise keelde", cookie_text: "Kasutame küpsiseid.", cookie_accept: "Nõustun", cookie_decline: "Keeldun", nav_home: "Avaleht", nav_services: "Teenused", nav_fleet: "Autopark", nav_reviews: "Arvustused", nav_track: "Jälgi", nav_faq: "KKK", btn_chat: "Vestle kohe", btn_track: "Jälgi", hero_badge: "Litsentseeritud ja kindlustatud kogu Euroopas", hero_title: "Lemmikloomade transpordi<br>eksperdid.", hero_subtitle: "Euroopa usaldusväärne lemmikloomade transport.", latest_delivery: "Viimane tarne", stat_countries: "Hõlmatud riigid", stat_pets: "Tarnitud lemmikloomad", stat_safety: "Ohutusrekord", stat_support: "Reaalajas tugi", services_title: "Kuidas me toimetame", services_subtitle: "Pealevõtmisest ukseni, iga lemmikloom nagu pereliige.", step1_title: "1. Õrn pealevõtmine", step1_desc: "Meie agendid võtavad lemmiklooma hoolikalt.", step2_title: "2. Ohutu transport", step2_desc: "Kliimaseadmega sõidukid regulaarsete peatustega.", step3_title: "3. Õnnelik saabumine", step3_desc: "Uksest ukseni tarne.", fleet_title: "Meie autopark", fleet_subtitle: "Spetsiaalsed sõidukid ohutuks transpordiks.", fleet_van: "Kaubik", fleet_van_desc: "Kliimaseade ja GPS", fleet_agent: "Professionaalsed agendid", fleet_agent_desc: "Koolitatud käsitlejad", fleet_carrier: "Turvalised puurid", fleet_carrier_desc: "IATA heakskiidetud", fleet_truck: "Kaugveoautod", fleet_truck_desc: "Riikidevahelisteks kolimisteks", fleet_door: "Uksest ukseni", fleet_door_desc: "Toome lemmikloomad teie koju", fleet_happy: "Õnnelikud saabumised", fleet_happy_desc: "Ohutu ja stressivaba", reviews_title: "Mida kliendid räägivad", reviews_subtitle: "Usaldus kogu Euroopas.", track_title: "Jälgi saadetist", track_subtitle: "Sisestage transpordi ID.", track_placeholder: "Sisestage ID (nt BA-12345)", track_status_label: "Staatus", track_eta_label: "Hinnanguline saabumine", track_picked: "Peale võetud", track_departed: "Väljunud", track_transit: "Transiidis", track_delivered: "Tarnitud", track_current: "Praegune asukoht", track_updated: "Uuendatud just nüüd", faq_title: "KKK", faq_subtitle: "Kõik meie teenuste kohta.", faq: [{ q: "Kas transport on ohutu?", a: "Absoluutselt. Spetsiaalsed kliimaseadmega sõidukid." }, { q: "Kas tegelete paberitööga?", a: "Jah, kogu vajalik dokumentatsioon." }, { q: "Kui kaua võtab?", a: "2-5 tööpäeva EL piires." }, { q: "Kas müüte loomi?", a: "Ei, ainult logistika ja transport." }, { q: "Kas saan jälgida?", a: "Jah! GPS ja WhatsApp fotod." }, { q: "Millised piirkonnad?", a: "Kõik 27 EL riiki pluss Šveits, Norra, ÜK." }, { q: "Kuidas broneerida?", a: "WhatsApp +385 97 647 9350 või email." }, { q: "Kas pakute kindlustust?", a: "Jah, täielikult kindlustatud." }], footer_desc: "Litsentseeritud ELis. Teie usaldusväärne partner.", footer_links: "Kiirlingid", footer_contact: "Kontakt", footer_eu: "Tegutseme kogu ELis", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Kiire abi?", footer_whatsapp: "Vestle WhatsAppis.", footer_privacy: "Privaatsuspoliitika", footer_terms: "Tingimused" },
+                fi: { modal_welcome: "Tervetuloa!", modal_detected_prefix: "Havaitsimme sijaintisi. Haluatko vaihtaa", modal_yes: "Kyllä", modal_no: "Pysy englanniksi", cookie_text: "Käytämme evästeitä.", cookie_accept: "Hyväksyn", cookie_decline: "Hylkään", nav_home: "Etusivu", nav_services: "Palvelut", nav_fleet: "Kalusto", nav_reviews: "Arvostelut", nav_track: "Seuranta", nav_faq: "UKK", btn_chat: "Keskustele", btn_track: "Seuraa", hero_badge: "Lisensoitu ja vakuutettu koko Euroopassa", hero_title: "Lemmikkieläinten<br>kuljetusasiantuntijat.", hero_subtitle: "Euroopan luotettava lemmikkikuljetus.", latest_delivery: "Viimeisin toimitus", stat_countries: "Katetut maat", stat_pets: "Toimitetut lemmikit", stat_safety: "Turvallisuusennätys", stat_support: "Live-tuki", services_title: "Miten toimitamme", services_subtitle: "Noudosta ovelle, jokainen lemmikki kuin perheenjäsen.", step1_title: "1. Hellävarainen nouto", step1_desc: "Agenttimme noutavat lemmikin huolella.", step2_title: "2. Turvallinen kuljetus", step2_desc: "Ilmastoidut ajoneuvot säännöllisillä pysähdyksillä.", step3_title: "3. Onnellinen saapuminen", step3_desc: "Ovelta ovelle -toimitus.", fleet_title: "Kalustomme", fleet_subtitle: "Erikoisajoneuvot turvalliseen kuljetukseen.", fleet_van: "Pakettiauto", fleet_van_desc: "Ilmastoitu ja GPS", fleet_agent: "Ammattitaitoiset agentit", fleet_agent_desc: "Koulutetut käsittelijät", fleet_carrier: "Turvalliset häkit", fleet_carrier_desc: "IATA-hyväksytty", fleet_truck: "Pitkän matkan kuorma-autot", fleet_truck_desc: "Maiden välisiin muuttoihin", fleet_door: "Ovelta ovelle", fleet_door_desc: "Tuomme lemmikit kotiisi", fleet_happy: "Onnelliset saapumiset", fleet_happy_desc: "Turvallinen ja stressitön", reviews_title: "Mitä asiakkaat sanovat", reviews_subtitle: "Luottamus koko Euroopassa.", track_title: "Seuraa toimitusta", track_subtitle: "Syötä kuljetustunnus.", track_placeholder: "Syötä tunnus (esim. BA-12345)", track_status_label: "Tila", track_eta_label: "Arvioitu saapuminen", track_picked: "Noudettu", track_departed: "Lähtenyt", track_transit: "Kuljetuksessa", track_delivered: "Toimitettu", track_current: "Nykyinen sijainti", track_updated: "Päivitetty juuri nyt", faq_title: "Usein kysytyt kysymykset", faq_subtitle: "Kaikki palveluistamme.", faq: [{ q: "Onko kuljetus turvallista?", a: "Ehdottomasti. Erikoistuneet ilmastoidut ajoneuvot." }, { q: "Hoidatteko paperityöt?", a: "Kyllä, kaikki tarvittavat asiakirjat." }, { q: "Kuinka kauan kestää?", a: "2-5 arkipäivää EU:n sisällä." }, { q: "Myyttekö lemmikkejä?", a: "Ei, vain logistiikka ja kuljetus." }, { q: "Voinko seurata?", a: "Kyllä! GPS ja WhatsApp-kuvat." }, { q: "Mitkä alueet?", a: "Kaikki 27 EU-maata plus Sveitsi, Norja, UK." }, { q: "Miten varaa?", a: "WhatsApp +385 97 647 9350 tai sähköposti." }, { q: "Tarjoatteko vakuutusta?", a: "Kyllä, täysin vakuutetut kuljetukset." }], footer_desc: "Lisensoitu EU:ssa. Luotettava kumppanisi.", footer_links: "Pikalinkit", footer_contact: "Yhteystiedot", footer_eu: "Toimimme koko EU:ssa", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Kiireellistä apua?", footer_whatsapp: "Keskustele WhatsAppissa.", footer_privacy: "Tietosuoja", footer_terms: "Ehdot" },
+                fr: { modal_welcome: "Bienvenue!", modal_detected_prefix: "Nous avons détecté votre emplacement. Voulez-vous passer en", modal_yes: "Oui", modal_no: "Rester en anglais", cookie_text: "Nous utilisons des cookies.", cookie_accept: "Accepter", cookie_decline: "Refuser", nav_home: "Accueil", nav_services: "Services", nav_fleet: "Flotte", nav_reviews: "Avis", nav_track: "Suivi", nav_faq: "FAQ", btn_chat: "Discuter", btn_track: "Suivre", hero_badge: "Agréé et assuré dans toute l'Europe", hero_title: "Experts en livraison<br>d'animaux.", hero_subtitle: "Service de confiance en Europe.", latest_delivery: "Dernière livraison", stat_countries: "Pays couverts", stat_pets: "Animaux livrés", stat_safety: "Sécurité", stat_support: "Support en direct", services_title: "Comment nous livrons", services_subtitle: "De la collecte à la porte, chaque animal comme un membre de la famille.", step1_title: "1. Collecte en douceur", step1_desc: "Nos agents collectent votre animal avec soin.", step2_title: "2. Transport sécurisé", step2_desc: "Véhicules climatisés avec arrêts réguliers.", step3_title: "3. Arrivée heureuse", step3_desc: "Livraison porte à porte.", fleet_title: "Notre flotte", fleet_subtitle: "Véhicules spécialisés pour un transport sûr.", fleet_van: "Camionnette", fleet_van_desc: "Climatisée et GPS", fleet_agent: "Agents professionnels", fleet_agent_desc: "Soigneurs formés", fleet_carrier: "Caisses sécurisées", fleet_carrier_desc: "Approuvées IATA", fleet_truck: "Camions longue distance", fleet_truck_desc: "Déménagements transfrontaliers", fleet_door: "Porte à porte", fleet_door_desc: "Livraison chez vous", fleet_happy: "Arrivées heureuses", fleet_happy_desc: "Sûr et sans stress", reviews_title: "Avis clients", reviews_subtitle: "Approuvé dans toute l'Europe.", track_title: "Suivre la livraison", track_subtitle: "Entrez votre ID de transport.", track_placeholder: "Entrez l'ID (ex: BA-12345)", track_status_label: "Statut", track_eta_label: "Arrivée estimée", track_picked: "Collecté", track_departed: "Parti", track_transit: "En transit", track_delivered: "Livré", track_current: "Position actuelle", track_updated: "Mis à jour à l'instant", faq_title: "Questions fréquentes", faq_subtitle: "Tout sur nos services.", faq: [{ q: "Le transport est-il sûr?", a: "Absolument. Véhicules climatisés spécialisés." }, { q: "Gérez-vous les papiers?", a: "Oui, tous les documents nécessaires." }, { q: "Combien de temps?", a: "2-5 jours ouvrés dans l'UE." }, { q: "Vendez-vous des animaux?", a: "Non, logistique et transport uniquement." }, { q: "Puis-je suivre?", a: "Oui! GPS et photos WhatsApp." }, { q: "Quelles zones?", a: "Les 27 pays de l'UE plus Suisse, Norvège, RU." }, { q: "Comment réserver?", a: "WhatsApp +385 97 647 9350 ou email." }, { q: "Une assurance?", a: "Oui, transports entièrement assurés." }], footer_desc: "Agréé dans l'UE. Votre partenaire de confiance.", footer_links: "Liens rapides", footer_contact: "Contact", footer_eu: "Opérant dans toute l'UE", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Aide urgente?", footer_whatsapp: "Chattez sur WhatsApp.", footer_privacy: "Confidentialité", footer_terms: "Conditions" },
+                de: { modal_welcome: "Willkommen!", modal_detected_prefix: "Standort erkannt. Wechseln zu", modal_yes: "Ja", modal_no: "Englisch behalten", cookie_text: "Wir verwenden Cookies.", cookie_accept: "Akzeptieren", cookie_decline: "Ablehnen", nav_home: "Start", nav_services: "Dienste", nav_fleet: "Flotte", nav_reviews: "Bewertungen", nav_track: "Sendung verfolgen", nav_faq: "FAQ", btn_chat: "Jetzt chatten", btn_track: "Suchen", hero_badge: "Lizenziert & versichert in ganz Europa", hero_title: "Experten für<br>Haustierlieferung.", hero_subtitle: "Europas vertrauenswürdiger Haustierlieferdienst.", latest_delivery: "Neueste Lieferung", stat_countries: "Abgedeckte Länder", stat_pets: "Gelieferte Haustiere", stat_safety: "Sicherheitsrekord", stat_support: "Live-Support", services_title: "Wie wir liefern", services_subtitle: "Von der Abholung bis zur Haustür, jedes Haustier wie ein Familienmitglied.", step1_title: "1. Sanfte Abholung", step1_desc: "Unsere Mitarbeiter holen Ihr Haustier mit Fürsorge ab.", step2_title: "2. Sicherer Transport", step2_desc: "Klimatisierte Fahrzeuge mit regelmäßigen Stopps.", step3_title: "3. Glückliche Ankunft", step3_desc: "Lieferung bis zur Haustür.", fleet_title: "Unsere Flotte", fleet_subtitle: "Spezialfahrzeuge für sicheren Transport.", fleet_van: "Lieferwagen", fleet_van_desc: "Klimatisiert & GPS", fleet_agent: "Professionelle Agenten", fleet_agent_desc: "Geschulte Tierpfleger", fleet_carrier: "Sichere Transportboxen", fleet_carrier_desc: "IATA-zugelassen", fleet_truck: "Langstrecken-LKWs", fleet_truck_desc: "Für länderübergreifende Umzüge", fleet_door: "Tür-zu-Tür", fleet_door_desc: "Wir bringen Haustiere zu Ihnen", fleet_happy: "Glückliche Ankünfte", fleet_happy_desc: "Sicher und stressfrei", reviews_title: "Was Kunden sagen", reviews_subtitle: "Vertrauen in ganz Europa.", track_title: "Sendung verfolgen", track_subtitle: "Transport-ID eingeben.", track_placeholder: "ID eingeben (z.B. BA-12345)", track_status_label: "Status", track_eta_label: "Voraussichtliche Ankunft", track_picked: "Abgeholt", track_departed: "Abgefahren", track_transit: "Unterwegs", track_delivered: "Geliefert", track_current: "Aktueller Standort", track_updated: "Gerade aktualisiert", faq_title: "Häufige Fragen", faq_subtitle: "Alles über unseren Service.", faq: [{ q: "Ist der Transport sicher?", a: "Absolut. Spezielle klimatisierte Fahrzeuge." }, { q: "Kümmern Sie sich um Papiere?", a: "Ja, alle erforderlichen Dokumente." }, { q: "Wie lange dauert es?", a: "2-5 Werktage innerhalb der EU." }, { q: "Verkaufen Sie Haustiere?", a: "Nein, nur Logistik und Transport." }, { q: "Kann ich verfolgen?", a: "Ja! GPS und WhatsApp-Fotos." }, { q: "Welche Gebiete?", a: "Alle 27 EU-Länder plus Schweiz, Norwegen, UK." }, { q: "Wie buche ich?", a: "WhatsApp +385 97 647 9350 oder E-Mail." }, { q: "Bieten Sie Versicherung?", a: "Ja, vollständig versicherte Transporte." }], footer_desc: "Lizenziert in der EU. Ihr vertrauenswürdiger Partner.", footer_links: "Schnelllinks", footer_contact: "Kontakt", footer_eu: "Tätig in der gesamten EU", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Dringende Hilfe?", footer_whatsapp: "Chat auf WhatsApp.", footer_privacy: "Datenschutz", footer_terms: "AGB" },
+                el: { modal_welcome: "Καλώς ήρθατε!", modal_detected_prefix: "Εντοπίσαμε την τοποθεσία σας. Μετάβαση σε", modal_yes: "Ναι", modal_no: "Παραμονή στα Αγγλικά", cookie_text: "Χρησιμοποιούμε cookies.", cookie_accept: "Αποδοχή", cookie_decline: "Απόρριψη", nav_home: "Αρχική", nav_services: "Υπηρεσίες", nav_fleet: "Στόλος", nav_reviews: "Κριτικές", nav_track: "Παρακολούθηση", nav_faq: "Συχνές Ερωτήσεις", btn_chat: "Συνομιλία", btn_track: "Παρακολούθηση", hero_badge: "Αδειοδοτημένο και Ασφαλισμένο σε όλη την Ευρώπη", hero_title: "Ειδικοί στην παράδοση<br>κατοικίδιων.", hero_subtitle: "Αξιόπιστη υπηρεσία παράδοσης κατοικίδιων στην Ευρώπη.", latest_delivery: "Τελευταία παράδοση", stat_countries: "Καλυπτόμενες χώρες", stat_pets: "Παραδοθέντα κατοικίδια", stat_safety: "Ρεκόρ ασφάλειας", stat_support: "Ζωντανή υποστήριξη", services_title: "Πώς παραδίδουμε", services_subtitle: "Από την παραλαβή στην πόρτα, κάθε κατοικίδιο σαν μέλος της οικογένειας.", step1_title: "1. Απαλή παραλαβή", step1_desc: "Οι πράκτορές μας παραλαμβάνουν με φροντίδα.", step2_title: "2. Ασφαλής μεταφορά", step2_desc: "Κλιματιζόμενα οχήματα με τακτικές στάσεις.", step3_title: "3. Χαρούμενη άφιξη", step3_desc: "Παράδοση πόρτα-πόρτα.", fleet_title: "Ο στόλος μας", fleet_subtitle: "Εξειδικευμένα οχήματα για ασφαλή μεταφορά.", fleet_van: "Βαν παράδοσης", fleet_van_desc: "Κλιματιζόμενο και GPS", fleet_agent: "Επαγγελματίες πράκτορες", fleet_agent_desc: "Εκπαιδευμένοι χειριστές", fleet_carrier: "Ασφαλή κλουβιά", fleet_carrier_desc: "Εγκεκριμένα IATA", fleet_truck: "Φορτηγά μεγάλων αποστάσεων", fleet_truck_desc: "Για διασυνοριακές μετακινήσεις", fleet_door: "Πόρτα-πόρτα", fleet_door_desc: "Φέρνουμε τα κατοικίδια στο σπίτι σας", fleet_happy: "Χαρούμενες αφίξεις", fleet_happy_desc: "Ασφαλής παράδοση χωρίς άγχος", reviews_title: "Τι λένε οι πελάτες", reviews_subtitle: "Εμπιστοσύνη σε όλη την Ευρώπη.", track_title: "Παρακολούθηση παράδοσης", track_subtitle: "Εισάγετε το αναγνωριστικό μεταφοράς.", track_placeholder: "Εισάγετε ID (π.χ. BA-12345)", track_status_label: "Κατάσταση", track_eta_label: "Εκτιμώμενη άφιξη", track_picked: "Παραλήφθηκε", track_departed: "Αναχώρησε", track_transit: "Σε μεταφορά", track_delivered: "Παραδόθηκε", track_current: "Τρέχουσα τοποθεσία", track_updated: "Ενημερώθηκε μόλις τώρα", faq_title: "Συχνές ερωτήσεις", faq_subtitle: "Όλα για τις υπηρεσίες μας.", faq: [{ q: "Είναι ασφαλής η μεταφορά;", a: "Απόλυτα. Εξειδικευμένα κλιματιζόμενα οχήματα." }, { q: "Αναλαμβάνετε τα έγγραφα;", a: "Ναι, όλα τα απαραίτητα έγγραφα." }, { q: "Πόσο διαρκεί;", a: "2-5 εργάσιμες ημέρες εντός ΕΕ." }, { q: "Πουλάτε κατοικίδια;", a: "Όχι, μόνο logistics και μεταφορές." }, { q: "Μπορώ να παρακολουθώ;", a: "Ναι! GPS και φωτογραφίες WhatsApp." }, { q: "Ποιες περιοχές;", a: "Όλες οι 27 χώρες της ΕΕ συν Ελβετία, Νορβηγία, ΗΒ." }, { q: "Πώς κλείνω;", a: "WhatsApp +385 97 647 9350 ή email." }, { q: "Προσφέρετε ασφάλιση;", a: "Ναι, πλήρως ασφαλισμένες μεταφορές." }], footer_desc: "Αδειοδοτημένο στην ΕΕ. Ο αξιόπιστος συνεργάτης σας.", footer_links: "Γρήγοροι σύνδεσμοι", footer_contact: "Επικοινωνία", footer_eu: "Λειτουργία σε όλη την ΕΕ", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Επείγουσα βοήθεια;", footer_whatsapp: "Συνομιλία στο WhatsApp.", footer_privacy: "Απόρρητο", footer_terms: "Όροι" },
+                hu: { modal_welcome: "Üdvözöljük!", modal_detected_prefix: "Észleltük a tartózkodási helyét. Szeretne váltani", modal_yes: "Igen", modal_no: "Maradjon angolul", cookie_text: "Sütiket használunk.", cookie_accept: "Elfogadom", cookie_decline: "Elutasítom", nav_home: "Kezdőlap", nav_services: "Szolgáltatások", nav_fleet: "Flotta", nav_reviews: "Vélemények", nav_track: "Követés", nav_faq: "GYIK", btn_chat: "Csevegés", btn_track: "Keresés", hero_badge: "Engedélyezve és biztosítva egész Európában", hero_title: "Kisállat-szállítási<br>szakértők.", hero_subtitle: "Európa megbízható kisállat-szállítója.", latest_delivery: "Legutóbbi szállítás", stat_countries: "Lefedett országok", stat_pets: "Szállított állatok", stat_safety: "Biztonsági rekord", stat_support: "Élő támogatás", services_title: "Hogyan szállítunk", services_subtitle: "Átvételtől az ajtóig, minden állat családtag.", step1_title: "1. Gyengéd átvétel", step1_desc: "Ügynökeink gondosan átveszik az állatot.", step2_title: "2. Biztonságos szállítás", step2_desc: "Légkondicionált járművek rendszeres megállókkal.", step3_title: "3. Boldog érkezés", step3_desc: "Házhoz szállítás.", fleet_title: "Flottánk", fleet_subtitle: "Speciális járművek a biztonságos szállításhoz.", fleet_van: "Furgon", fleet_van_desc: "Légkondicionált és GPS", fleet_agent: "Profi ügynökök", fleet_agent_desc: "Képzett kezelők", fleet_carrier: "Biztonságos ketrecek", fleet_carrier_desc: "IATA jóváhagyott", fleet_truck: "Távolsági teherautók", fleet_truck_desc: "Országok közötti költöztetéshez", fleet_door: "Házhoz szállítás", fleet_door_desc: "Otthonába visszük az állatot", fleet_happy: "Boldog érkezések", fleet_happy_desc: "Biztonságos és stresszmentes", reviews_title: "Vélemények", reviews_subtitle: "Bizalom egész Európában.", track_title: "Szállítás követése", track_subtitle: "Adja meg a szállítási azonosítót.", track_placeholder: "Azonosító (pl. BA-12345)", track_status_label: "Állapot", track_eta_label: "Várható érkezés", track_picked: "Átvéve", track_departed: "Elindult", track_transit: "Szállítás alatt", track_delivered: "Kézbesítve", track_current: "Jelenlegi hely", track_updated: "Frissítve épp most", faq_title: "Gyakori kérdések", faq_subtitle: "Minden a szolgáltatásunkról.", faq: [{ q: "Biztonságos a szállítás?", a: "Teljesen. Speciális légkondicionált járművek." }, { q: "Intézik a papírokat?", a: "Igen, minden szükséges dokumentumot." }, { q: "Mennyi ideig tart?", a: "2-5 munkanap az EU-n belül." }, { q: "Árusítanak állatokat?", a: "Nem, csak logisztika és szállítás." }, { q: "Nyomon követhetem?", a: "Igen! GPS és WhatsApp fotók." }, { q: "Milyen területek?", a: "Mind a 27 EU-tagállam plusz Svájc, Norvégia, UK." }, { q: "Hogyan foglalok?", a: "WhatsApp +385 97 647 9350 vagy email." }, { q: "Kínálnak biztosítást?", a: "Igen, teljes körűen biztosított szállítások." }], footer_desc: "Engedélyezve az EU-ban. Megbízható partnere.", footer_links: "Linkek", footer_contact: "Kapcsolat", footer_eu: "Az EU-ban működünk", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Sürgős segítség?", footer_whatsapp: "Csevegés WhatsAppon.", footer_privacy: "Adatvédelem", footer_terms: "Feltételek" },
+                ga: { modal_welcome: "Fáilte!", modal_detected_prefix: "D'aimsigh muid do shuíomh. Ar mhaith leat aistriú go", modal_yes: "Tá", modal_no: "Fan i mBéarla", cookie_text: "Úsáidimid fianáin.", cookie_accept: "Glac", cookie_decline: "Diúltaigh", nav_home: "Baile", nav_services: "Seirbhísí", nav_fleet: "Flít", nav_reviews: "Léirmheasanna", nav_track: "Rianaigh", nav_faq: "Ceisteanna", btn_chat: "Comhrá", btn_track: "Cuardaigh", hero_badge: "Ceadúnaithe san Eoraip", hero_title: "Saineolaithe ar<br>Sheachadadh Peataí.", hero_subtitle: "Seirbhís iontaofa seachadta peataí san Eoraip.", latest_delivery: "Seachadadh Deireanach", stat_countries: "Tíortha", stat_pets: "Peataí", stat_safety: "Sábháilteacht", stat_support: "Tacaíocht", services_title: "Conas a Sheachadaimid", services_subtitle: "Ó phiocadh suas go doras.", step1_title: "1. Piocadh Suas Mín", step1_desc: "Bailíonn ár ngníomhairí do pheata le cúram.", step2_title: "2. Iompar Sábháilte", step2_desc: "Feithiclí aer-rialaithe le stadanna.", step3_title: "3. Teacht Sona", step3_desc: "Seachadadh doras go doras.", fleet_title: "Ár bhFlít", fleet_subtitle: "Feithiclí speisialaithe.", fleet_van: "Veain", fleet_van_desc: "Aer-rialú agus GPS", fleet_agent: "Gníomhairí", fleet_agent_desc: "Láimhseálaithe oilte", fleet_carrier: "Iompróirí Slán", fleet_carrier_desc: "Faofa ag IATA", fleet_truck: "Trucailí", fleet_truck_desc: "Achair fhada", fleet_door: "Doras go Doras", fleet_door_desc: "Chuig do theach", fleet_happy: "Teacht Sona", fleet_happy_desc: "Gan strus", reviews_title: "Léirmheasanna", reviews_subtitle: "Iontaobhas úinéirí peataí.", track_title: "Rianaigh Do Sheachadadh", track_subtitle: "Iontráil d'aitheantas.", track_placeholder: "Aitheantas Iompair (m.sh. BA-12345)", track_status_label: "Stádas", track_eta_label: "Teacht Measta", track_picked: "Bailithe", track_departed: "Imithe", track_transit: "Faoi Bhealach", track_delivered: "Seachadta", track_current: "Suíomh Reatha", track_updated: "Nuashonraithe", faq_title: "Ceisteanna Coitianta", faq_subtitle: "Gach rud faoinár seirbhís.", faq: [{ q: "An bhfuil iompar peataí sábháilte?", a: "Cinnte. Feithiclí speisialaithe aer-rialaithe." }, { q: "An láimhseálann sibh páipéarachas?", a: "Sea, gach doiciméad riachtanach." }, { q: "Cá fhad a thógann sé?", a: "2-5 lá gnó laistigh den AE." }, { q: "An ndíolann sibh peataí?", a: "Ní dhíolaimid. Lóistíocht agus iompar amháin." }, { q: "An féidir liom mo pheata a rianú?", a: "Sea! GPS agus grianghraif WhatsApp." }, { q: "Cad iad na ceantair?", a: "Gach 27 ballstát den AE." }, { q: "Conas a chuirim in áirithe?", a: "WhatsApp +385 97 647 9350 nó r-phost." }, { q: "An dtugann sibh árachas?", a: "Sea, gach iompar lán-árachaithe." }], footer_desc: "Ceadúnaithe san AE.", footer_links: "Naisc", footer_contact: "Teagmháil", footer_eu: "Ag feidhmiú san AE", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Cabhair Práinneach?", footer_whatsapp: "Comhrá ar WhatsApp.", footer_privacy: "Príobháideachas", footer_terms: "Téarmaí" },
+                it: { modal_welcome: "Benvenuto!", modal_detected_prefix: "Posizione rilevata. Vuoi passare a", modal_yes: "Sì", modal_no: "Rimani in inglese", cookie_text: "Usiamo i cookie.", cookie_accept: "Accetta", cookie_decline: "Rifiuta", nav_home: "Home", nav_services: "Servizi", nav_fleet: "Flotta", nav_reviews: "Recensioni", nav_track: "Traccia", nav_faq: "FAQ", btn_chat: "Chatta", btn_track: "Traccia", hero_badge: "Autorizzato e Assicurato in Tutta Europa", hero_title: "Esperti in Consegna<br>di Animali.", hero_subtitle: "Servizio affidabile di consegna animali in Europa.", latest_delivery: "Ultima consegna", stat_countries: "Paesi Coperti", stat_pets: "Animali Consegnati", stat_safety: "Record di Sicurezza", stat_support: "Supporto Dal Vivo", services_title: "Come Consegniamo", services_subtitle: "Dal ritiro alla porta, ogni animale come un membro della famiglia.", step1_title: "1. Ritiro Delicato", step1_desc: "I nostri agenti ritirano il tuo animale con cura.", step2_title: "2. Trasporto Sicuro", step2_desc: "Veicoli climatizzati con soste regolari.", step3_title: "3. Arrivo Felice", step3_desc: "Consegna porta a porta.", fleet_title: "La Nostra Flotta", fleet_subtitle: "Veicoli specializzati per un trasporto sicuro.", fleet_van: "Furgone", fleet_van_desc: "Climatizzato e GPS", fleet_agent: "Agenti Professionisti", fleet_agent_desc: "Addetti qualificati", fleet_carrier: "Trasportini Sicuri", fleet_carrier_desc: "Approvati IATA", fleet_truck: "Camion a Lunga Percorrenza", fleet_truck_desc: "Per traslochi tra paesi", fleet_door: "Porta a Porta", fleet_door_desc: "Portiamo gli animali a casa tua", fleet_happy: "Arrivi Felici", fleet_happy_desc: "Sicuro e senza stress", reviews_title: "Cosa Dicono i Clienti", reviews_subtitle: "Scelto in tutta Europa.", track_title: "Traccia la Consegna", track_subtitle: "Inserisci il tuo ID di Trasporto.", track_placeholder: "Inserisci ID (es: BA-12345)", track_status_label: "Stato", track_eta_label: "Arrivo Previsto", track_picked: "Ritirato", track_departed: "Partito", track_transit: "In Transito", track_delivered: "Consegnato", track_current: "Posizione Attuale", track_updated: "Aggiornato ora", faq_title: "Domande Frequenti", faq_subtitle: "Tutto sui nostri servizi.", faq: [{ q: "Il trasporto è sicuro?", a: "Assolutamente. Veicoli climatizzati specializzati." }, { q: "Gestite la documentazione?", a: "Sì, tutti i documenti necessari." }, { q: "Quanto tempo richiede?", a: "2-5 giorni lavorativi nell'UE." }, { q: "Vendete animali?", a: "No, solo logistica e trasporto." }, { q: "Posso tracciare?", a: "Sì! GPS e foto WhatsApp." }, { q: "Quali aree?", a: "Tutti i 27 paesi UE piu Svizzera, Norvegia, UK." }, { q: "Come prenoto?", a: "WhatsApp +385 97 647 9350 o email." }, { q: "Offrite assicurazione?", a: "Sì, trasporti completamente assicurati." }], footer_desc: "Autorizzato nell'UE. Il tuo partner di fiducia.", footer_links: "Link Rapidi", footer_contact: "Contattaci", footer_eu: "Operiamo in tutta l'UE", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Aiuto Urgente?", footer_whatsapp: "Chatta su WhatsApp.", footer_privacy: "Privacy", footer_terms: "Termini" },
+                lv: { modal_welcome: "Laipni lūdzam!", modal_detected_prefix: "Mēs noteicām jūsu atrašanās vietu. Vai vēlaties pārslēgt uz", modal_yes: "Jā", modal_no: "Palikt angļu valodā", cookie_text: "Mēs izmantojam sīkfailus.", cookie_accept: "Piekrītu", cookie_decline: "Noraidīt", nav_home: "Sākums", nav_services: "Pakalpojumi", nav_fleet: "Autoparks", nav_reviews: "Atsauksmes", nav_track: "Izsekot", nav_faq: "BUJ", btn_chat: "Tērzēt", btn_track: "Meklēt", hero_badge: "Licencēts un apdrošināts visā Eiropā", hero_title: "Mājdzīvnieku<br>piegādes eksperti.", hero_subtitle: "Uzticama mājdzīvnieku piegāde Eiropā.", latest_delivery: "Pēdējā piegāde", stat_countries: "Aptvertās valstis", stat_pets: "Piegādātie dzīvnieki", stat_safety: "Drošības rekords", stat_support: "Tiešraides atbalsts", services_title: "Kā mēs piegādājam", services_subtitle: "No saņemšanas līdz durvīm.", step1_title: "1. Maiga saņemšana", step1_desc: "Mūsu aģenti rūpīgi paņem jūsu dzīvnieku.", step2_title: "2. Drošs transports", step2_desc: "Kontrolēta klimata transportlīdzekļi ar pieturām.", step3_title: "3. Laimīga ierašanās", step3_desc: "Piegāde līdz durvīm.", fleet_title: "Mūsu autoparks", fleet_subtitle: "Specializēti transportlīdzekļi.", fleet_van: "Furgons", fleet_van_desc: "Klimats un GPS", fleet_agent: "Profesionāli aģenti", fleet_agent_desc: "Apmācīti vadītāji", fleet_carrier: "Droši būri", fleet_carrier_desc: "IATA apstiprināti", fleet_truck: "Kravas automašīnas", fleet_truck_desc: "Lieli attālumi", fleet_door: "No durvīm līdz durvīm", fleet_door_desc: "Uz jūsu mājām", fleet_happy: "Laimīgas ierašanās", fleet_happy_desc: "Bez stresa", reviews_title: "Atsauksmes", reviews_subtitle: "Īpašnieku uzticība.", track_title: "Izsekot sūtījumu", track_subtitle: "Ievadiet ID.", track_placeholder: "Transporta ID (piem., BA-12345)", track_status_label: "Statuss", track_eta_label: "Paredzamā ierašanās", track_picked: "Paņemts", track_departed: "Izbraucis", track_transit: "Tranzītā", track_delivered: "Piegādāts", track_current: "Pašreizējā atrašanās vieta", track_updated: "Atjaunināts", faq_title: "Bieži uzdotie jautājumi", faq_subtitle: "Viss par mūsu pakalpojumu.", faq: [{ q: "Vai transports ir drošs?", a: "Pilnīgi. Specializēti klimata kontroles transportlīdzekļi." }, { q: "Vai jūs kārtojat dokumentus?", a: "Jā, visi nepieciešamie dokumenti." }, { q: "Cik ilgi tas aizņem?", a: "2-5 darba dienas ES iekšienē." }, { q: "Vai jūs pārdodat dzīvniekus?", a: "Nē, tikai loģistika un transports." }, { q: "Vai es varu izsekot?", a: "Jā! GPS un WhatsApp foto." }, { q: "Kādas teritorijas?", a: "Visas 27 ES valstis." }, { q: "Kā pieteikties?", a: "WhatsApp +385 97 647 9350 vai e-pasts." }, { q: "Vai piedāvājat apdrošināšanu?", a: "Jā, pilnībā apdrošināti pārvadājumi." }], footer_desc: "Licencēts ES.", footer_links: "Saites", footer_contact: "Kontakti", footer_eu: "Darbojamies ES", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Steidzama palīdzība?", footer_whatsapp: "Tērzēšana WhatsApp.", footer_privacy: "Privātums", footer_terms: "Noteikumi" },
+                lt: { modal_welcome: "Sveiki!", modal_detected_prefix: "Aptikome jūsų vietą. Ar norite perjungti į", modal_yes: "Taip", modal_no: "Likti anglų kalboje", cookie_text: "Mes naudojame slapukus.", cookie_accept: "Sutinku", cookie_decline: "Atmesti", nav_home: "Pagrindinis", nav_services: "Paslaugos", nav_fleet: "Autoparkas", nav_reviews: "Atsiliepimai", nav_track: "Sekti", nav_faq: "DUK", btn_chat: "Pokalbis", btn_track: "Ieškoti", hero_badge: "Licencijuota ir apdrausta visoje Europoje", hero_title: "Gyvūnų pristatymo<br>ekspertai.", hero_subtitle: "Patikima gyvūnų pristatymo paslauga Europoje.", latest_delivery: "Paskutinis pristatymas", stat_countries: "Aptarnaujamos šalys", stat_pets: "Pristatyti gyvūnai", stat_safety: "Saugumo rekordas", stat_support: "Tiesioginė pagalba", services_title: "Kaip pristatome", services_subtitle: "Nuo paėmimo iki durų.", step1_title: "1. Švelnus paėmimas", step1_desc: "Mūsų agentai rūpestingai paima jūsų gyvūną.", step2_title: "2. Saugus transportas", step2_desc: "Kontroliuojamo klimato transporto priemonės.", step3_title: "3. Laimingas atvykimas", step3_desc: "Pristatymas iki durų.", fleet_title: "Mūsų autoparkas", fleet_subtitle: "Specializuotos transporto priemonės.", fleet_van: "Furgonas", fleet_van_desc: "Klimatas ir GPS", fleet_agent: "Profesionalūs agentai", fleet_agent_desc: "Apmokyti prižiūrėtojai", fleet_carrier: "Saugūs narveliai", fleet_carrier_desc: "IATA patvirtinta", fleet_truck: "Sunkvežimiai", fleet_truck_desc: "Ilgos distancijos", fleet_door: "Nuo durų iki durų", fleet_door_desc: "Į jūsų namus", fleet_happy: "Laimingi atvykimai", fleet_happy_desc: "Be streso", reviews_title: "Atsiliepimai", reviews_subtitle: "Savininkų pasitikėjimas.", track_title: "Sekti siuntą", track_subtitle: "Įveskite ID.", track_placeholder: "Transporto ID (pvz., BA-12345)", track_status_label: "Būsena", track_eta_label: "Numatomas atvykimas", track_picked: "Paimta", track_departed: "Išvyko", track_transit: "Tranzitu", track_delivered: "Pristatyta", track_current: "Dabartinė vieta", track_updated: "Atnaujinta", faq_title: "Dažniausiai užduodami klausimai", faq_subtitle: "Viskas apie mūsų paslaugą.", faq: [{ q: "Ar transportas saugus?", a: "Visiškai. Specializuotos klimato kontrolės transporto priemonės." }, { q: "Ar tvarkote dokumentus?", a: "Taip, visi reikalingi dokumentai." }, { q: "Kiek laiko užtrunka?", a: "2-5 darbo dienos ES viduje." }, { q: "Ar parduodate gyvūnus?", a: "Ne, tik logistika ir transportas." }, { q: "Ar galiu sekti?", a: "Taip! GPS ir WhatsApp nuotraukos." }, { q: "Kokios teritorijos?", a: "Visos 27 ES šalys." }, { q: "Kaip užsisakyti?", a: "WhatsApp +385 97 647 9350 arba el. paštas." }, { q: "Ar siūlote draudimą?", a: "Taip, visiškai apdrausti pervežimai." }], footer_desc: "Licencijuota ES.", footer_links: "Nuorodos", footer_contact: "Kontaktai", footer_eu: "Veikiame ES", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Skubi pagalba?", footer_whatsapp: "Pokalbis WhatsApp.", footer_privacy: "Privatumas", footer_terms: "Sąlygos" },
+                mt: { modal_welcome: "Merħba!", modal_detected_prefix: "Sibna l-post tiegħek. Tixtieq taqleb għal", modal_yes: "Iva", modal_no: "Ibqa' bl-Ingliż", cookie_text: "Nużaw il-cookies.", cookie_accept: "Aċċetta", cookie_decline: "Irrifjuta", nav_home: "Dar", nav_services: "Servizzi", nav_fleet: "Flotta", nav_reviews: "Reviżjonijiet", nav_track: "Traċċa", nav_faq: "Mistoqsijiet", btn_chat: "Chat", btn_track: "Fittex", hero_badge: "Liċenzjat u Assigurat fl-Ewropa Kollha", hero_title: "Esperti fit-Trasport<br>ta' Annimali.", hero_subtitle: "Servizz affidabbli ta' trasport ta' annimali fl-Ewropa.", latest_delivery: "L-aħħar kunsinna", stat_countries: "Pajjiżi Koperti", stat_pets: "Annimali Kkunsinnjati", stat_safety: "Rekord ta' Sigurtà", stat_support: "Appoġġ Ħaj", services_title: "Kif Nikkonsenjaw", services_subtitle: "Minn pick-up sal-bieb.", step1_title: "1. Pick-up Ġentili", step1_desc: "L-aġenti tagħna jiġbru l-annimal tiegħek b'attenzjoni.", step2_title: "2. Trasport Sikur", step2_desc: "Vetturi b'klima kkontrollata b'waqfiet.", step3_title: "3. Wasla Ferħana", step3_desc: "Kunsinna bieb bieb.", fleet_title: "Il-Flotta Tagħna", fleet_subtitle: "Vetturi speċjalizzati.", fleet_van: "Vann", fleet_van_desc: "Klima u GPS", fleet_agent: "Aġenti Professjonali", fleet_agent_desc: "Imħarrġa", fleet_carrier: "Gaġeġ Sikuri", fleet_carrier_desc: "IATA approvati", fleet_truck: "Trakkijiet", fleet_truck_desc: "Distanzi twal", fleet_door: "Bieb Bieb", fleet_door_desc: "Fid-dar tiegħek", fleet_happy: "Wasliet Ferħana", fleet_happy_desc: "Mingħajr stress", reviews_title: "Reviżjonijiet", reviews_subtitle: "Fiduċja tas-sidien.", track_title: "Traċċa l-Kunsinna", track_subtitle: "Daħħal l-ID.", track_placeholder: "ID tat-Trasport (eż. BA-12345)", track_status_label: "Status", track_eta_label: "Wasla Stmata", track_picked: "Miġbur", track_departed: "Telaq", track_transit: "Fi Triq", track_delivered: "Ikkunsinnjat", track_current: "Post Kurrenti", track_updated: "Aġġornat", faq_title: "Mistoqsijiet Frekwenti", faq_subtitle: "Kollox dwar is-servizz tagħna.", faq: [{ q: "It-trasport huwa sikur?", a: "Assolutament. Vetturi speċjalizzati b'klima kkontrollata." }, { q: "Tieħdu ħsieb il-burokrazija?", a: "Iva, id-dokumenti kollha meħtieġa." }, { q: "Kemm idum?", a: "2-5 ijiem tax-xogħol fl-UE." }, { q: "Tbigħu l-annimali?", a: "Le, biss loġistika u trasport." }, { q: "Nista' nittraċċa?", a: "Iva! GPS u ritratti WhatsApp." }, { q: "Liema żoni?", a: "Is-27 pajjiż kollha tal-UE." }, { q: "Kif nirriżerva?", a: "WhatsApp +385 97 647 9350 jew email." }, { q: "Toffru assigurazzjoni?", a: "Iva, trasporti kompletament assigurati." }], footer_desc: "Liċenzjat fl-UE.", footer_links: "Links", footer_contact: "Kuntatt", footer_eu: "Noperaw fl-UE", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Għajnuna Urġenti?", footer_whatsapp: "Chat fuq WhatsApp.", footer_privacy: "Privatezza", footer_terms: "Termini" },
+                pl: { modal_welcome: "Witamy!", modal_detected_prefix: "Wykryliśmy Twoją lokalizację. Czy chcesz przełączyć na", modal_yes: "Tak", modal_no: "Zostań przy angielskim", cookie_text: "Używamy plików cookie.", cookie_accept: "Akceptuj", cookie_decline: "Odrzuć", nav_home: "Start", nav_services: "Usługi", nav_fleet: "Flota", nav_reviews: "Opinie", nav_track: "Śledź", nav_faq: "FAQ", btn_chat: "Czatuj", btn_track: "Szukaj", hero_badge: "Licencjonowany i ubezpieczony w całej Europie", hero_title: "Eksperci od dostawy<br>zwierząt.", hero_subtitle: "Zaufany serwis dostawy zwierząt w Europie.", latest_delivery: "Ostatnia dostawa", stat_countries: "Obsłużone kraje", stat_pets: "Dostarczone zwierzęta", stat_safety: "Rekord bezpieczeństwa", stat_support: "Wsparcie na żywo", services_title: "Jak dostarczamy", services_subtitle: "Od odbioru do drzwi.", step1_title: "1. Delikatny odbiór", step1_desc: "Nasi agenci odbierają zwierzę z troską.", step2_title: "2. Bezpieczny transport", step2_desc: "Klimatyzowane pojazdy z postojami.", step3_title: "3. Szczęśliwy przyjazd", step3_desc: "Dostawa do drzwi.", fleet_title: "Nasza flota", fleet_subtitle: "Specjalistyczne pojazdy.", fleet_van: "Van", fleet_van_desc: "Klimatyzacja i GPS", fleet_agent: "Profesjonalni agenci", fleet_agent_desc: "Przeszkoleni opiekunowie", fleet_carrier: "Bezpieczne transportery", fleet_carrier_desc: "Zatwierdzone IATA", fleet_truck: "Ciężarówki długodystansowe", fleet_truck_desc: "Międzynarodowe przewozy", fleet_door: "Door-to-door", fleet_door_desc: "Do Twojego domu", fleet_happy: "Szczęśliwe przyjazdy", fleet_happy_desc: "Bez stresu", reviews_title: "Opinie klientów", reviews_subtitle: "Zaufanie w całej Europie.", track_title: "Śledź dostawę", track_subtitle: "Wprowadź ID transportu.", track_placeholder: "ID transportu (np. BA-12345)", track_status_label: "Status", track_eta_label: "Szacowany przyjazd", track_picked: "Odebrany", track_departed: "Wyruszył", track_transit: "W tranzycie", track_delivered: "Dostarczony", track_current: "Aktualna lokalizacja", track_updated: "Zaktualizowano", faq_title: "Często zadawane pytania", faq_subtitle: "Wszystko o naszym serwisie.", faq: [{ q: "Czy transport jest bezpieczny?", a: "Absolutnie. Specjalistyczne pojazdy klimatyzowane." }, { q: "Czy zajmujecie się dokumentami?", a: "Tak, cała niezbędna dokumentacja." }, { q: "Jak długo to trwa?", a: "2-5 dni roboczych w UE." }, { q: "Czy sprzedajecie zwierzęta?", a: "Nie, tylko logistyka i transport." }, { q: "Czy mogę śledzić?", a: "Tak! GPS i zdjęcia WhatsApp." }, { q: "Jakie obszary?", a: "Wszystkie 27 krajów UE." }, { q: "Jak zarezerwować?", a: "WhatsApp +385 97 647 9350 lub email." }, { q: "Czy oferujecie ubezpieczenie?", a: "Tak, w pełni ubezpieczone transporty." }], footer_desc: "Licencjonowany w UE.", footer_links: "Szybkie linki", footer_contact: "Kontakt", footer_eu: "Działamy w UE", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Pilna pomoc?", footer_whatsapp: "Czat na WhatsApp.", footer_privacy: "Prywatność", footer_terms: "Warunki" },
+                pt: { modal_welcome: "Bem-vindo!", modal_detected_prefix: "Detectamos sua localização. Deseja mudar para", modal_yes: "Sim", modal_no: "Ficar em inglês", cookie_text: "Usamos cookies.", cookie_accept: "Aceitar", cookie_decline: "Recusar", nav_home: "Início", nav_services: "Serviços", nav_fleet: "Frota", nav_reviews: "Avaliações", nav_track: "Rastrear", nav_faq: "FAQ", btn_chat: "Conversar", btn_track: "Rastrear", hero_badge: "Licenciado e Seguro em Toda a Europa", hero_title: "Especialistas em Entrega<br>de Animais.", hero_subtitle: "Serviço confiável de entrega de animais na Europa.", latest_delivery: "Última entrega", stat_countries: "Países Cobertos", stat_pets: "Animais Entregues", stat_safety: "Registo de Segurança", stat_support: "Suporte ao Vivo", services_title: "Como Entregamos", services_subtitle: "Da recolha à porta.", step1_title: "1. Recolha Gentil", step1_desc: "Os nossos agentes recolhem o seu animal com cuidado.", step2_title: "2. Transporte Seguro", step2_desc: "Veículos climatizados com paragens.", step3_title: "3. Chegada Feliz", step3_desc: "Entrega porta a porta.", fleet_title: "A Nossa Frota", fleet_subtitle: "Veículos especializados.", fleet_van: "Carrinha", fleet_van_desc: "Climatizada e GPS", fleet_agent: "Agentes Profissionais", fleet_agent_desc: "Tratadores treinados", fleet_carrier: "Transportadoras Seguras", fleet_carrier_desc: "Aprovadas IATA", fleet_truck: "Camiões Longa Distância", fleet_truck_desc: "Mudanças entre países", fleet_door: "Porta a Porta", fleet_door_desc: "Levamos os animais a sua casa", fleet_happy: "Chegadas Felizes", fleet_happy_desc: "Sem stress", reviews_title: "O Que Dizem os Clientes", reviews_subtitle: "Confiado em toda a Europa.", track_title: "Rastreie a Sua Entrega", track_subtitle: "Introduza o seu ID de Transporte.", track_placeholder: "ID de Transporte (ex: BA-12345)", track_status_label: "Estado", track_eta_label: "Chegada Estimada", track_picked: "Recolhido", track_departed: "Partiu", track_transit: "Em Trânsito", track_delivered: "Entregue", track_current: "Localização Atual", track_updated: "Atualizado agora", faq_title: "Perguntas Frequentes", faq_subtitle: "Tudo sobre o nosso serviço.", faq: [{ q: "O transporte é seguro?", a: "Absolutamente. Veículos climatizados especializados." }, { q: "Tratam da documentação?", a: "Sim, todos os documentos necessários." }, { q: "Quanto tempo demora?", a: "2-5 dias úteis na UE." }, { q: "Vendem animais?", a: "Não, apenas logística e transporte." }, { q: "Posso rastrear?", a: "Sim! GPS e fotos WhatsApp." }, { q: "Que áreas cobrem?", a: "Todos os 27 países da UE." }, { q: "Como reservar?", a: "WhatsApp +385 97 647 9350 ou email." }, { q: "Oferecem seguro?", a: "Sim, transportes totalmente segurados." }], footer_desc: "Licenciado na UE.", footer_links: "Links Rápidos", footer_contact: "Contacte-nos", footer_eu: "A operar em toda a UE", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Precisa de Ajuda Urgente?", footer_whatsapp: "Converse no WhatsApp.", footer_privacy: "Privacidade", footer_terms: "Termos" },
+                ro: { modal_welcome: "Bun venit!", modal_detected_prefix: "Am detectat locația dvs. Doriți să treceți la", modal_yes: "Da", modal_no: "Rămâneți în engleză", cookie_text: "Folosim cookie-uri.", cookie_accept: "Accept", cookie_decline: "Resping", nav_home: "Acasă", nav_services: "Servicii", nav_fleet: "Flota", nav_reviews: "Recenzii", nav_track: "Urmărire", nav_faq: "Întrebări", btn_chat: "Chat", btn_track: "Caută", hero_badge: "Licențiat și Asigurat în Toată Europa", hero_title: "Experți în Livrarea<br>Animalelor.", hero_subtitle: "Serviciu de încredere pentru livrarea animalelor în Europa.", latest_delivery: "Ultima livrare", stat_countries: "Țări Acoperite", stat_pets: "Animale Livrate", stat_safety: "Record de Siguranță", stat_support: "Suport Live", services_title: "Cum Livrăm", services_subtitle: "De la preluare la ușă.", step1_title: "1. Preluare Blândă", step1_desc: "Agenții noștri preiau animalul cu grijă.", step2_title: "2. Transport Sigur", step2_desc: "Vehicule climatizate cu opriri.", step3_title: "3. Sosire Fericită", step3_desc: "Livrare la ușă.", fleet_title: "Flota Noastră", fleet_subtitle: "Vehicule specializate.", fleet_van: "Dubă", fleet_van_desc: "Climatizare și GPS", fleet_agent: "Agenți Profesioniști", fleet_agent_desc: "Manipulatori instruiți", fleet_carrier: "Cuști Sigure", fleet_carrier_desc: "Aprobate IATA", fleet_truck: "Camioane Lungă Distanță", fleet_truck_desc: "Mutări între țări", fleet_door: "Ușă la Ușă", fleet_door_desc: "La domiciliul dvs.", fleet_happy: "Sosiri Fericite", fleet_happy_desc: "Fără stres", reviews_title: "Ce Spun Clienții", reviews_subtitle: "Încredere în toată Europa.", track_title: "Urmăriți Livrarea", track_subtitle: "Introduceți ID-ul de transport.", track_placeholder: "ID transport (ex: BA-12345)", track_status_label: "Status", track_eta_label: "Sosire Estimată", track_picked: "Preluat", track_departed: "Plecat", track_transit: "În tranzit", track_delivered: "Livrat", track_current: "Locația curentă", track_updated: "Actualizat", faq_title: "Întrebări Frecvente", faq_subtitle: "Totul despre serviciul nostru.", faq: [{ q: "Este transportul sigur?", a: "Absolut. Vehicule climatizate specializate." }, { q: "Vă ocupați de documente?", a: "Da, toate documentele necesare." }, { q: "Cât durează?", a: "2-5 zile lucrătoare în UE." }, { q: "Vindeți animale?", a: "Nu, doar logistică și transport." }, { q: "Pot urmări?", a: "Da! GPS și fotografii WhatsApp." }, { q: "Ce zone acoperiți?", a: "Toate cele 27 de țări UE." }, { q: "Cum rezerv?", a: "WhatsApp +385 97 647 9350 sau email." }, { q: "Oferiți asigurare?", a: "Da, transporturi complet asigurate." }], footer_desc: "Licențiat în UE.", footer_links: "Linkuri Rapide", footer_contact: "Contactați-ne", footer_eu: "Operăm în UE", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Ajutor Urgent?", footer_whatsapp: "Chat pe WhatsApp.", footer_privacy: "Confidențialitate", footer_terms: "Termeni" },
+                sk: { modal_welcome: "Vitajte!", modal_detected_prefix: "Zistili sme vašu polohu. Chcete prepnúť na", modal_yes: "Áno", modal_no: "Zostať v angličtine", cookie_text: "Používame cookies.", cookie_accept: "Prijať", cookie_decline: "Odmietnuť", nav_home: "Domov", nav_services: "Služby", nav_fleet: "Vozový park", nav_reviews: "Recenzie", nav_track: "Sledovanie", nav_faq: "FAQ", btn_chat: "Chat", btn_track: "Hľadať", hero_badge: "Licencované a poistené v celej Európe", hero_title: "Experti na prepravu<br>zvierat.", hero_subtitle: "Dôveryhodná preprava zvierat v Európe.", latest_delivery: "Posledné doručenie", stat_countries: "Pokryté krajiny", stat_pets: "Doručené zvieratá", stat_safety: "Bezpečnostný rekord", stat_support: "Živá podpora", services_title: "Ako doručujeme", services_subtitle: "Od vyzdvihnutia k dverám.", step1_title: "1. Šetrné vyzdvihnutie", step1_desc: "Naši agenti vyzdvihnú zviera s opaterou.", step2_title: "2. Bezpečný transport", step2_desc: "Klimatizované vozidlá s prestávkami.", step3_title: "3. Šťastný príchod", step3_desc: "Doručenie k dverám.", fleet_title: "Náš vozový park", fleet_subtitle: "Špecializované vozidlá.", fleet_van: "Dodávka", fleet_van_desc: "Klimatizácia a GPS", fleet_agent: "Profesionálni agenti", fleet_agent_desc: "Vyškolení pracovníci", fleet_carrier: "Bezpečné prepravky", fleet_carrier_desc: "IATA schválené", fleet_truck: "Kamióny na dlhé vzdialenosti", fleet_truck_desc: "Medzištátne sťahovanie", fleet_door: "Od dverí k dverám", fleet_door_desc: "Až k vám domov", fleet_happy: "Šťastné príchody", fleet_happy_desc: "Bez stresu", reviews_title: "Čo hovoria zákazníci", reviews_subtitle: "Dôvera v celej Európe.", track_title: "Sledujte zásielku", track_subtitle: "Zadajte ID prepravy.", track_placeholder: "ID prepravy (napr. BA-12345)", track_status_label: "Stav", track_eta_label: "Predpokladaný príchod", track_picked: "Vyzdvihnuté", track_departed: "Odídené", track_transit: "V tranzite", track_delivered: "Doručené", track_current: "Aktuálna poloha", track_updated: "Aktualizované", faq_title: "Časté otázky", faq_subtitle: "Všetko o našej službe.", faq: [{ q: "Je preprava bezpečná?", a: "Absolútne. Špecializované klimatizované vozidlá." }, { q: "Vyřizujete dokumenty?", a: "Áno, všetky potrebné dokumenty." }, { q: "Ako dlho to trvá?", a: "2-5 pracovných dní v rámci EÚ." }, { q: "Predávate zvieratá?", a: "Nie, iba logistika a doprava." }, { q: "Môžem sledovať?", a: "Áno! GPS a WhatsApp fotografie." }, { q: "Aké oblasti?", a: "Všetkých 27 krajín EÚ." }, { q: "Ako rezervovať?", a: "WhatsApp +385 97 647 9350 alebo email." }, { q: "Ponúkate poistenie?", a: "Áno, plne poistené prepravy." }], footer_desc: "Licencované v EÚ.", footer_links: "Odkazy", footer_contact: "Kontakt", footer_eu: "Pôsobíme v EÚ", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Naliehavá pomoc?", footer_whatsapp: "Chat na WhatsApp.", footer_privacy: "Súkromie", footer_terms: "Podmienky" },
+                sl: { modal_welcome: "Dobrodošli!", modal_detected_prefix: "Zaznali smo vašo lokacijo. Želite preklopiti na", modal_yes: "Da", modal_no: "Ostanite v angleščini", cookie_text: "Uporabljamo piškotke.", cookie_accept: "Sprejmi", cookie_decline: "Zavrni", nav_home: "Domov", nav_services: "Storitve", nav_fleet: "Vozni park", nav_reviews: "Ocene", nav_track: "Sledenje", nav_faq: "Pogosta vprašanja", btn_chat: "Klepet", btn_track: "Išči", hero_badge: "Licencirano in zavarovano po vsej Evropi", hero_title: "Strokovnjaki za dostavo<br>hišnih ljubljenčkov.", hero_subtitle: "Zanesljiva dostava hišnih ljubljenčkov v Evropi.", latest_delivery: "Zadnja dostava", stat_countries: "Pokrite države", stat_pets: "Dostavljene živali", stat_safety: "Varnostni rekord", stat_support: "Podpora v živo", services_title: "Kako dostavljamo", services_subtitle: "Od prevzema do vrat.", step1_title: "1. Nežen prevzem", step1_desc: "Naši agenti prevzamejo žival s skrbjo.", step2_title: "2. Varen prevoz", step2_desc: "Vozila z nadzorovano klimo in postanki.", step3_title: "3. Srečen prihod", step3_desc: "Dostava do vrat.", fleet_title: "Naš vozni park", fleet_subtitle: "Specializirana vozila.", fleet_van: "Kombi", fleet_van_desc: "Klima in GPS", fleet_agent: "Profesionalni agenti", fleet_agent_desc: "Usposobljeni skrbniki", fleet_carrier: "Varni zabojniki", fleet_carrier_desc: "IATA odobreni", fleet_truck: "Tovornjaki za dolge razdalje", fleet_truck_desc: "Meddržavne selitve", fleet_door: "Od vrat do vrat", fleet_door_desc: "Do vašega doma", fleet_happy: "Srečni prihodi", fleet_happy_desc: "Brez stresa", reviews_title: "Kaj pravijo stranke", reviews_subtitle: "Zaupanje po vsej Evropi.", track_title: "Sledite pošiljki", track_subtitle: "Vnesite ID prevoza.", track_placeholder: "ID prevoza (npr. BA-12345)", track_status_label: "Status", track_eta_label: "Predviden prihod", track_picked: "Prevzeto", track_departed: "Odšlo", track_transit: "V tranzitu", track_delivered: "Dostavljeno", track_current: "Trenutna lokacija", track_updated: "Posodobljeno", faq_title: "Pogosta vprašanja", faq_subtitle: "Vse o naši storitvi.", faq: [{ q: "Je prevoz varen?", a: "Absolutno. Specializirana klimatizirana vozila." }, { q: "Ali urejate dokumente?", a: "Da, vsi potrebni dokumenti." }, { q: "Kako dolgo traja?", a: "2-5 delovnih dni znotraj EU." }, { q: "Ali prodajate živali?", a: "Ne, samo logistika in prevoz." }, { q: "Lahko sledim?", a: "Da! GPS in WhatsApp fotografije." }, { q: "Katera območja?", a: "Vseh 27 držav EU." }, { q: "Kako rezerviram?", a: "WhatsApp +385 97 647 9350 ali email." }, { q: "Ali nudite zavarovanje?", a: "Da, popolnoma zavarovani prevozi." }], footer_desc: "Licencirano v EU.", footer_links: "Povezave", footer_contact: "Kontakt", footer_eu: "Delujemo v EU", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Nujna pomoč?", footer_whatsapp: "Klepet na WhatsApp.", footer_privacy: "Zasebnost", footer_terms: "Pogoji" },
+                es: { modal_welcome: "¡Bienvenido!", modal_detected_prefix: "Detectamos su ubicación. ¿Desea cambiar a", modal_yes: "Sí", modal_no: "Quedarse en inglés", cookie_text: "Usamos cookies.", cookie_accept: "Aceptar", cookie_decline: "Rechazar", nav_home: "Inicio", nav_services: "Servicios", nav_fleet: "Flota", nav_reviews: "Reseñas", nav_track: "Seguir", nav_faq: "FAQ", btn_chat: "Chatear", btn_track: "Seguir", hero_badge: "Licenciado y Asegurado en Toda Europa", hero_title: "Expertos en Entrega<br>de Mascotas.", hero_subtitle: "Servicio confiable de entrega de mascotas en Europa.", latest_delivery: "Última entrega", stat_countries: "Países Cubiertos", stat_pets: "Mascotas Entregadas", stat_safety: "Récord de Seguridad", stat_support: "Soporte en Vivo", services_title: "Cómo Entregamos", services_subtitle: "Desde la recogida hasta la puerta.", step1_title: "1. Recogida Suave", step1_desc: "Nuestros agentes recogen su mascota con cuidado.", step2_title: "2. Transporte Seguro", step2_desc: "Vehículos climatizados con paradas.", step3_title: "3. Llegada Feliz", step3_desc: "Entrega puerta a puerta.", fleet_title: "Nuestra Flota", fleet_subtitle: "Vehículos especializados.", fleet_van: "Furgoneta", fleet_van_desc: "Climatizada y GPS", fleet_agent: "Agentes Profesionales", fleet_agent_desc: "Cuidadores capacitados", fleet_carrier: "Transportines Seguros", fleet_carrier_desc: "Aprobados IATA", fleet_truck: "Camiones Larga Distancia", fleet_truck_desc: "Mudanzas entre países", fleet_door: "Puerta a Puerta", fleet_door_desc: "Llevamos mascotas a su hogar", fleet_happy: "Llegadas Felices", fleet_happy_desc: "Sin estrés", reviews_title: "Lo Que Dicen los Clientes", reviews_subtitle: "Confiado en toda Europa.", track_title: "Seguir Su Entrega", track_subtitle: "Ingrese su ID de Transporte.", track_placeholder: "ID de Transporte (ej: BA-12345)", track_status_label: "Estado", track_eta_label: "Llegada Estimada", track_picked: "Recogido", track_departed: "Partió", track_transit: "En Tránsito", track_delivered: "Entregado", track_current: "Ubicación Actual", track_updated: "Actualizado ahora", faq_title: "Preguntas Frecuentes", faq_subtitle: "Todo sobre nuestro servicio.", faq: [{ q: "¿Es seguro el transporte?", a: "Absolutamente. Vehículos climatizados especializados." }, { q: "¿Gestionan la documentación?", a: "Sí, todos los documentos necesarios." }, { q: "¿Cuánto tarda?", a: "2-5 días hábiles en la UE." }, { q: "¿Venden mascotas?", a: "No, solo logística y transporte." }, { q: "¿Puedo seguir a mi mascota?", a: "¡Sí! GPS y fotos por WhatsApp." }, { q: "¿Qué áreas cubren?", a: "Los 27 países de la UE." }, { q: "¿Cómo reservo?", a: "WhatsApp +385 97 647 9350 o email." }, { q: "¿Ofrecen seguro?", a: "Sí, transportes completamente asegurados." }], footer_desc: "Autorizado en la UE.", footer_links: "Enlaces Rápidos", footer_contact: "Contáctenos", footer_eu: "Operando en toda la UE", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "¿Ayuda Urgente?", footer_whatsapp: "Chatee en WhatsApp.", footer_privacy: "Privacidad", footer_terms: "Términos" },
+                sv: { modal_welcome: "Välkommen!", modal_detected_prefix: "Vi upptäckte din plats. Vill du byta till", modal_yes: "Ja", modal_no: "Stanna på engelska", cookie_text: "Vi använder cookies.", cookie_accept: "Acceptera", cookie_decline: "Avböj", nav_home: "Hem", nav_services: "Tjänster", nav_fleet: "Flotta", nav_reviews: "Recensioner", nav_track: "Spåra", nav_faq: "FAQ", btn_chat: "Chatta", btn_track: "Spåra", hero_badge: "Licensierat och försäkrat i hela Europa", hero_title: "Experter på<br>husdjursleverans.", hero_subtitle: "Europas pålitliga husdjursleveranstjänst.", latest_delivery: "Senaste leverans", stat_countries: "Täckta länder", stat_pets: "Levererade husdjur", stat_safety: "Säkerhetsrekord", stat_support: "Live-support", services_title: "Hur vi levererar", services_subtitle: "Från upphämtning till dörren.", step1_title: "1. Skonsam upphämtning", step1_desc: "Våra agenter hämtar ditt husdjur med omsorg.", step2_title: "2. Säker transport", step2_desc: "Klimatkontrollerade fordon med stopp.", step3_title: "3. Lycklig ankomst", step3_desc: "Dörr-till-dörr leverans.", fleet_title: "Vår flotta", fleet_subtitle: "Specialiserade fordon.", fleet_van: "Skåpbil", fleet_van_desc: "Klimatanläggning och GPS", fleet_agent: "Professionella agenter", fleet_agent_desc: "Utbildade förare", fleet_carrier: "Säkra burar", fleet_carrier_desc: "IATA-godkända", fleet_truck: "Långdistanslastbilar", fleet_truck_desc: "För husdjursflyttar", fleet_door: "Dörr-till-dörr", fleet_door_desc: "Till ditt hem", fleet_happy: "Lyckliga ankomster", fleet_happy_desc: "Stressfri", reviews_title: "Vad kunderna säger", reviews_subtitle: "Förtroende i hela Europa.", track_title: "Spåra din leverans", track_subtitle: "Ange ditt transport-ID.", track_placeholder: "Transport-ID (t.ex. BA-12345)", track_status_label: "Status", track_eta_label: "Beräknad ankomst", track_picked: "Upphämtad", track_departed: "Avgått", track_transit: "Under transport", track_delivered: "Levererad", track_current: "Nuvarande plats", track_updated: "Uppdaterad nu", faq_title: "Vanliga frågor", faq_subtitle: "Allt om vår tjänst.", faq: [{ q: "Är transporten säker?", a: "Absolut. Specialiserade klimatkontrollerade fordon." }, { q: "Hanterar ni pappersarbete?", a: "Ja, alla nödvändiga dokument." }, { q: "Hur lång tid tar det?", a: "2-5 arbetsdagar inom EU." }, { q: "Säljer ni husdjur?", a: "Nej, bara logistik och transport." }, { q: "Kan jag spåra?", a: "Ja! GPS och WhatsApp-bilder." }, { q: "Vilka områden?", a: "Alla 27 EU-länder." }, { q: "Hur bokar jag?", a: "WhatsApp +385 97 647 9350 eller e-post." }, { q: "Erbjuder ni försäkring?", a: "Ja, fullt försäkrade transporter." }], footer_desc: "Licensierat i EU.", footer_links: "Snabblänkar", footer_contact: "Kontakta oss", footer_eu: "Verksamma i hela EU", footer_whatsapp_number: "WhatsApp: +385 97 647 9350", footer_urgent: "Behöver du akut hjälp?", footer_whatsapp: "Chatta på WhatsApp.", footer_privacy: "Integritetspolicy", footer_terms: "Villkor" }
+            };
+
+            const allLangs = { en };
+            Object.keys(t).forEach(code => { allLangs[code] = { ...en, ...t[code] }; });
+            return allLangs;
+        }
+
+        const translations = buildTranslations();
+        let currentLang = 'en';
+
+        function init() {
+            populateLanguages();
+            renderFleet();
+            renderReviews();
+            renderFAQs();
+            showCookieConsent();
+            const userLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+            if (translations[userLang] && userLang !== 'en') {
+                document.getElementById('detected-country').innerText = languages[userLang] ? languages[userLang].name : userLang;
+                document.getElementById('lang-modal').classList.remove('hidden');
+                document.getElementById('lang-modal').dataset.intendedLang = userLang;
+            } else { setLanguage('en'); }
+        }
+
+        function populateLanguages() {
+            const container = document.getElementById('language-list');
+            container.innerHTML = '';
+            Object.keys(languages).forEach(code => {
+                const div = document.createElement('div');
+                div.className = "px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2 text-gray-700 text-sm";
+                div.innerHTML = `<span>${languages[code].flag}</span> <span>${languages[code].name}</span>`;
+                div.onclick = function() { setLanguage(code); document.getElementById('lang-dropdown').classList.remove('show'); };
+                container.appendChild(div);
+            });
+        }
+
+        function toggleLangDropdown() { document.getElementById('lang-dropdown').classList.toggle('show'); }
+        document.addEventListener('click', function(e) { if (!e.target.closest('.relative')) { document.getElementById('lang-dropdown').classList.remove('show'); } });
+
+        function setLanguage(lang) {
+            if (!translations[lang]) return;
+            currentLang = lang;
+            document.getElementById('current-lang').innerText = lang.toUpperCase();
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                const translation = translations[lang][key] || translations['en'][key];
+                if (translation) {
+                    if (el.hasAttribute('data-placeholder')) { el.setAttribute('placeholder', translation); }
+                    else { el.innerHTML = translation; }
+                }
+            });
+            renderFleet();
+            renderFAQs();
+        }
+
+        function closeLangModal(shouldSwitch) {
+            const modal = document.getElementById('lang-modal');
+            setLanguage(shouldSwitch && modal.dataset.intendedLang ? modal.dataset.intendedLang : 'en');
+            modal.classList.add('hidden');
+        }
+
+        function renderFleet() {
+            const container = document.getElementById('fleet-container');
+            const lang = translations[currentLang] || translations['en'];
+            container.innerHTML = fleetImages.map(f => `
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg h-80">
+                    <img src="${f.img}" alt="" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='${f.fallback}'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
+                        <div class="text-white"><h3 class="font-bold text-xl">${lang[f.titleKey]}</h3><p class="text-sm text-gray-300">${lang[f.descKey]}</p></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderReviews() {
+            document.getElementById('reviews-container').innerHTML = reviews.map(r => `
+                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <div class="flex items-center gap-1 mb-4">${'<i class="fas fa-star star-rating"></i>'.repeat(r.stars)}</div>
+                    <p class="text-gray-600 mb-6 italic">"${r.text}"</p>
+                    <div class="flex items-center gap-4"><img src="${r.img}" alt="${r.name}" class="w-12 h-12 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'"><div><p class="font-bold text-gray-900">${r.name}</p><p class="text-sm text-gray-500">${r.location}</p></div></div>
+                </div>
+            `).join('');
+        }
+
+        function renderFAQs() {
+            const container = document.getElementById('faq-container');
+            const faqs = (translations[currentLang] || translations['en']).faq;
+            container.innerHTML = faqs.map((faq, i) => `
+                <div class="border border-gray-200 rounded-lg bg-white overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center bg-white hover:bg-gray-50 transition" onclick="toggleFaq(${i})">
+                        <span class="font-semibold text-gray-800">${faq.q}</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300" id="faq-icon-${i}"></i>
+                    </button>
+                    <div id="faq-ans-${i}" class="hidden px-6 pb-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4 bg-gray-50">${faq.a}</div>
+                </div>
+            `).join('');
+        }
+
+        function toggleFaq(index) {
+            const allAns = document.querySelectorAll('[id^="faq-ans-"]');
+            const allIcons = document.querySelectorAll('[id^="faq-icon-"]');
+            const ans = document.getElementById(`faq-ans-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            const isHidden = ans.classList.contains('hidden');
+            allAns.forEach(el => el.classList.add('hidden'));
+            allIcons.forEach(el => el.classList.remove('rotate-180'));
+            if (isHidden) { ans.classList.remove('hidden'); icon.classList.add('rotate-180'); }
+        }
+
+        function trackOrder() {
+            const input = document.getElementById('tracking-input').value.trim();
+            if (!input) return;
+            const btn = document.querySelector('button[onclick="trackOrder()"]');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<div class="loader w-5 h-5 border-2 border-white rounded-full mx-auto"></div>';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = orig; btn.disabled = false;
+                const r = document.getElementById('tracking-result'); r.classList.remove('hidden');
+                document.getElementById('track-status').innerText = ["In Transit", "Customs Clearance", "Out for Delivery"][Math.floor(Math.random() * 3)];
+                document.getElementById('track-location').innerText = ["Frankfurt Hub, DE", "Vienna, Austria", "Munich Distribution, DE"][Math.floor(Math.random() * 3)];
+                document.getElementById('progress-bar').style.width = (Math.floor(Math.random() * 40) + 40) + '%';
+                document.getElementById('track-eta').innerText = (Math.floor(Math.random() * 3) + 1) + " Days";
+                r.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1500);
+        }
+
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+        function showCookieConsent() { if (!localStorage.getItem('cookieConsent')) setTimeout(() => document.getElementById('cookie-consent').classList.remove('translate-y-full'), 1000); }
+        function acceptCookies() { localStorage.setItem('cookieConsent', 'accepted'); document.getElementById('cookie-consent').classList.add('translate-y-full'); }
+        function declineCookies() { localStorage.setItem('cookieConsent', 'declined'); document.getElementById('cookie-consent').classList.add('translate-y-full'); }
+        window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('shadow-md', window.scrollY > 50));
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>
